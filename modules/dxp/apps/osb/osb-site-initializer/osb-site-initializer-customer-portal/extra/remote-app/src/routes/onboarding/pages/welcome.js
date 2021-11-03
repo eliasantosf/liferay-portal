@@ -1,5 +1,6 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import BaseButton from "~/common/components/BaseButton";
+import { STORAGE_KEYS, Storage } from "~/common/services/liferay/storage";
 import Intro from "../assets/intro.svg";
 import { AppContext } from "../context";
 import { changeStep } from "../context/actions";
@@ -8,6 +9,16 @@ import Layout from "./layout";
 
 const Welcome = () => {
   const [, dispatch] = useContext(AppContext);
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    const userApplication = Storage.getItem(STORAGE_KEYS.USER_APPLICATION);
+
+    if (userApplication) {
+      const userAccount = JSON.parse(userApplication);
+      setUserName(userAccount.name);
+    }
+  }, []);
 
   return (
     <Layout
@@ -22,7 +33,7 @@ const Welcome = () => {
         ),
       }}
       headerProps={{
-        greetings: "Hello Sarah,",
+        greetings: `Hello ${userName},`,
         title: "Welcome to Liferay’s Customer Portal",
       }}
       mainStyles="align-items-center d-flex flex-column pt-4 px-6"
