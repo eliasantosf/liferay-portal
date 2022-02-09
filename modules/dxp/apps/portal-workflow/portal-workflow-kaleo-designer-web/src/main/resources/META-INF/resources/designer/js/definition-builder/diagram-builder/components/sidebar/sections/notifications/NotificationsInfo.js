@@ -16,6 +16,7 @@ import React, {useContext, useState} from 'react';
 
 import {DiagramBuilderContext} from '../../../../DiagramBuilderContext';
 import SidebarPanel from '../../SidebarPanel';
+import Role from './Role';
 
 const executionTypeOptions = [
 	{
@@ -90,10 +91,11 @@ const templateLanguageOptions = [
 const NotificationsInfo = ({
 	identifier,
 	index,
+	label,
 	sectionsLength,
 	setSections,
 }) => {
-	const {setSelectedItem} = useContext(DiagramBuilderContext);
+	const {selectedItem, setSelectedItem} = useContext(DiagramBuilderContext);
 	const [executionType, setExecutionType] = useState('');
 	const [notificationDescription, setNotificationDescription] = useState('');
 	const [notificationName, setNotificationName] = useState('');
@@ -119,6 +121,7 @@ const NotificationsInfo = ({
 					recipientType: values.map(
 						({recipientType}) => recipientType
 					),
+					role: values.map(({role}) => role),
 					template: values.map(({template}) => template),
 					templateLanguage: values.map(
 						({templateLanguage}) => templateLanguage
@@ -291,6 +294,21 @@ const NotificationsInfo = ({
 					))}
 				</ClaySelect>
 			</ClayForm.Group>
+
+			{selectedItem?.data?.notifications?.recipientType[0] !==
+				'assetCreator' &&
+				selectedItem?.data?.notifications?.recipientType[0] !==
+					'taskAssignees' &&
+				selectedItem?.data?.notifications && (
+					<SidebarPanel panelTitle={Liferay.Language.get('type')}>
+						{selectedItem?.data?.notifications?.recipientType[0] ===
+							'role' && (
+							<ClayForm.Group className="recipient-type-form-group">
+								<Role />
+							</ClayForm.Group>
+						)}
+					</SidebarPanel>
+				)}
 
 			<div className="sheet-subtitle" />
 
