@@ -18,7 +18,7 @@ const Role = () => {
 		<BaseRole
 			inputLabel={Liferay.Language.get('role-id')}
 			selectLabel={Liferay.Language.get('role-type')}
-		></BaseRole>
+		/>
 	);
 };
 

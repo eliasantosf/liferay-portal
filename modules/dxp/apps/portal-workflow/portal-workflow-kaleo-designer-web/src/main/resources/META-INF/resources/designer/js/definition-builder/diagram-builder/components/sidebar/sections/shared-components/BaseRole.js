@@ -22,7 +22,7 @@ export default function BaseRole({
 	defaultFieldValue = {id: '', name: ''},
 	inputLabel,
 	selectLabel,
-	updateSelectedItem = () => {},
+	updateSelectedItem,
 }) {
 	const [active, setActive] = useState(false);
 	const [filter, setFilter] = useState(true);
@@ -69,7 +69,9 @@ export default function BaseRole({
 	const handleItemClick = (item) => {
 		setFieldValues({id: item.id, name: item.name});
 		setActive(false);
-		updateSelectedItem(item);
+		if (updateSelectedItem) {
+			updateSelectedItem(item);
+		}
 	};
 
 	return (

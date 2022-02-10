@@ -9,7 +9,7 @@
  * distribution rights of the Software.
  */
 
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 
 import {DiagramBuilderContext} from '../../../../../DiagramBuilderContext';
 import BaseRole from '../../shared-components/BaseRole';
@@ -34,12 +34,6 @@ const Role = () => {
 			},
 		}));
 	};
-
-	useEffect(() => {
-		if (selectedItem) {
-			console.log('selectedItem', selectedItem);
-		}
-	}, [selectedItem]);
 
 	return (
 		<BaseRole
