@@ -49,6 +49,7 @@ export default function DiagramBuilder() {
 		definitionId,
 		deserialize,
 		elements,
+		restore,
 		selectedLanguageId,
 		setActive,
 		setDefinitionDescription,
@@ -261,8 +262,7 @@ export default function DiagramBuilder() {
 						setSelectedItemNewId(null);
 
 						setSelectedItem(element);
-					}
-					else if (isEdge(element)) {
+					} else if (isEdge(element)) {
 						element = {
 							...element,
 							...(selectedItem.id === element.source && {
@@ -326,6 +326,26 @@ export default function DiagramBuilder() {
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [definitionId, version]);
+
+	useEffect(() => {
+		retrieveDefinitionRequest(definitionId, restore)
+			.then((response) => response.json())
+			.then(({active, content, description}) => {
+				setActive(active);
+				setDefinitionDescription(description);
+
+				deserializeUtil.updateXMLDefinition(content);
+
+				const elements = deserializeUtil.getElements();
+
+				setElements(elements);
+
+				populateAssignmentsData(elements, setElements);
+				populateNotificationsData(elements, setElements);
+			});
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [restore]);
 
 	const contextProps = {
 		collidingElements,
