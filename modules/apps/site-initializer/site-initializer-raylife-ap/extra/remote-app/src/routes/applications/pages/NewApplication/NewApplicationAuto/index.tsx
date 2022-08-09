@@ -303,6 +303,8 @@ const NewApplicationAuto = ({children}: DriverInfoProps) => {
 							</ClayButton>
 						)}
 
+						{!state.isAbleToNextStep}
+
 						<ClayButton
 							className="text-uppercase"
 							disabled={!state.isAbleToNextStep}
