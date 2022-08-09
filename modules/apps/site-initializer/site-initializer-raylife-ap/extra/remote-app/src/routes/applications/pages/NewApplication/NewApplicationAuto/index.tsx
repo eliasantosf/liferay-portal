@@ -302,6 +302,16 @@ const NewApplicationAuto = ({children}: DriverInfoProps) => {
 								Generate Quote
 							</ClayButton>
 						)}
+
+						<ClayButton
+							className="text-uppercase"
+							disabled={!state.isAbleToNextStep}
+							displayType="primary"
+							onClick={(event) => handleNextClick(event)}
+							small={true}
+						>
+							Next
+						</ClayButton>
 					</div>
 				</div>
 			</div>

@@ -27,11 +27,11 @@ const NewApplication = () => {
 
 	return (
 		<NewApplicationAuto>
-			{state.currentStep === 0 && <ContactInfo />}
+			{state.currentStep === 2 && <ContactInfo />}
 
 			{state.currentStep === 1 && <VehicleInfo />}
 
-			{state.currentStep === 2 && <DriverInfo />}
+			{state.currentStep === 0 && <DriverInfo />}
 
 			{state.currentStep === 3 && <Coverage />}
 
