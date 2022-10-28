@@ -1190,6 +1190,14 @@
     "@clayui/icon" "^3.56.0"
     classnames "^2.2.6"
 
+"@clayui/button@^3.73.0":
+  version "3.73.0"
+  resolved "https://registry.yarnpkg.com/@clayui/button/-/button-3.73.0.tgz#6e4240b18785b1a5db41578be0960d7170479980"
+  integrity sha512-KfG9Mnq7MmA/Ve+BB8JFsHZXJDfjXsWNlJeCNJITfPjNHqWI+SR3Z64fAHNcM5ZkWDFf12CQNXa/0IoW7ghkTA==
+  dependencies:
+    "@clayui/icon" "^3.56.0"
+    classnames "^2.2.6"
+
 "@clayui/card@^3.62.0":
   version "3.65.1"
   resolved "https://registry.yarnpkg.com/@clayui/card/-/card-3.65.1.tgz#5e883642e844c9652b02dbb31da98f8f622e472f"
@@ -1452,6 +1460,19 @@
     "@clayui/shared" "^3.58.0"
     classnames "^2.2.6"
 
+"@clayui/navigation-bar@^3.78.2":
+  version "3.78.2"
+  resolved "https://registry.yarnpkg.com/@clayui/navigation-bar/-/navigation-bar-3.78.2.tgz#458dcb06783fcadf2cb738ba3d38052a832c1dbb"
+  integrity sha512-UVABP8ZT38gu3s/GQzb/dKeftchb6omMgshJ3TOKSHVNkKE65784uHsC/KBx5rL1AqIXlwf/hf3IU0+kD1W9kg==
+  dependencies:
+    "@clayui/button" "^3.73.0"
+    "@clayui/icon" "^3.56.0"
+    "@clayui/layout" "^3.65.1"
+    "@clayui/shared" "^3.78.2"
+    classnames "^2.2.6"
+    react-transition-group "^4.4.1"
+    warning "^4.0.3"
+
 "@clayui/pagination-bar@^3.67.0":
   version "3.67.0"
   resolved "https://registry.yarnpkg.com/@clayui/pagination-bar/-/pagination-bar-3.67.0.tgz#f70c79bce0a89c50a63a77d8667c6ae5eafcd747"
@@ -1487,6 +1508,13 @@
   version "3.56.0"
   resolved "https://registry.yarnpkg.com/@clayui/provider/-/provider-3.56.0.tgz#7dc20ca502a2017a6eb5b9bc9eac1ebb4ed1600f"
   integrity sha512-PrU8Uf++QGzJL2q5f9Wqf1eRYJi8nzbul62do5mYypKbF7SC4y0OmNMcw2uznwv9mceXnCxJPowrcGxYLFK11g==
+  dependencies:
+    "@clayui/icon" "^3.56.0"
+
+"@clayui/provider@^3.77.0":
+  version "3.77.0"
+  resolved "https://registry.yarnpkg.com/@clayui/provider/-/provider-3.77.0.tgz#edb523d132d3f56f203e005b1f4b99912b11e2a8"
+  integrity sha512-KT0Iwexi632Bf/fbIZxoZg5X9B1HW/I3ISW9Lq+VfXmi26KA97Qtv4U96WbRjOgARLT89gye5GGsB2FqHBrIhw==
   dependencies:
     "@clayui/icon" "^3.56.0"
 
@@ -1533,6 +1561,18 @@
     "@clayui/button" "^3.65.0"
     "@clayui/link" "^3.56.0"
     "@clayui/provider" "^3.56.0"
+    classnames "^2.2.6"
+    dom-align "^1.12.2"
+    warning "^4.0.3"
+
+"@clayui/shared@^3.78.2":
+  version "3.78.2"
+  resolved "https://registry.yarnpkg.com/@clayui/shared/-/shared-3.78.2.tgz#b67ab77273693fc669729a5adb11b752bcbcea8e"
+  integrity sha512-HD7ZBI0m3fiowF4PRshtEiN5SJzGVz1vAAM7WJ9668UAI+7mqme+hpwvpD3ZbRFxxQibTeZXOVRAsS6rja9hrA==
+  dependencies:
+    "@clayui/button" "^3.73.0"
+    "@clayui/link" "^3.56.0"
+    "@clayui/provider" "^3.77.0"
     classnames "^2.2.6"
     dom-align "^1.12.2"
     warning "^4.0.3"

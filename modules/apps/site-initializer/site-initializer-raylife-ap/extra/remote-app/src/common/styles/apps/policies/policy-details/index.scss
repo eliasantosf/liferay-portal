@@ -1,5 +1,6 @@
 .policy-details-container {
 	overflow-x: hidden;
+	min-width: 270px;
 }
 
 .policy-summary-container,
@@ -11,9 +12,11 @@
 	padding: 30px 200px !important;
 }
 
-@media screen and (max-width: 1700px) {
+@media screen and (max-width: 1500px) {
 	.policy-details-container .policy-detail-content {
 		padding: 30px 50px !important;
+		display: flex;
+		flex-wrap: wrap;
 	}
 }
 
@@ -22,3 +25,5 @@
 		padding: 30px 20px !important;
 	}
 }
+
+
