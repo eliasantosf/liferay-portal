@@ -81,9 +81,9 @@ const Table: React.FC<TableProps> = ({
 								>
 									{item.type === 'status' && (
 										<div
-											className={`${rowContent[
-												item.key
-											].toLowerCase()} flex-shrink-0 mr-2 rounded-circle status-color`}
+											className={`${
+												rowContent[item.key]
+											} flex-shrink-0 mr-2 rounded-circle status-color`}
 										></div>
 									)}
 
