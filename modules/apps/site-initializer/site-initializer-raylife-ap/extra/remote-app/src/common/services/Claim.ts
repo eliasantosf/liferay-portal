@@ -21,7 +21,10 @@ export function getClaims(parameters: Parameters = {}) {
 	const parametersList = Object.keys(parameters);
 	if (parametersList.length) {
 		return axios.get(
-			`${DeliveryAPI}/${parametersFormater(parametersList, parameters)}`
+			`${DeliveryAPI}?nestedFields=r_policyToClaims_c_raylifePolicyId&${parametersFormater(
+				parametersList,
+				parameters
+			)}`
 		);
 	}
 

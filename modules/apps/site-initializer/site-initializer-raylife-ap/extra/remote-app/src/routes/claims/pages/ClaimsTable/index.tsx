@@ -13,14 +13,15 @@
  */
 
 import ClayButton from '@clayui/button';
+import ClayForm, {ClayInput} from '@clayui/form';
 import ClayIcon from '@clayui/icon';
 import {ClayPaginationWithBasicItems} from '@clayui/pagination';
 import ClayPaginationBar from '@clayui/pagination-bar';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 
 import Header from '../../../../common/components/header';
 import Table from '../../../../common/components/table';
-import {getPolicyByExternalReferenceCode} from '../../../../common/services';
+import {Parameters} from '../../../../common/services';
 import {
 	deleteClaimByExternalReferenceCode,
 	getClaims,
@@ -37,6 +38,51 @@ const ClaimsTable = () => {
 	const [secondPaginationLabel, setSecondPaginationLabel] = useState<number>(
 		1
 	);
+	const [searchInput, setSearchInput] = useState('');
+	const [sortByDate, setSortByDate] = useState('desc');
+
+	const filterSearch = `contains(id, '${searchInput}') or contains(r_policyToClaims_c_raylifePolicyERC, '${searchInput}')`;
+
+	const generateParameters = (filtered?: string) => {
+		const parameters: Parameters =
+			filtered === undefined
+				? {
+						page: '0',
+						pageSize: '0',
+						sort: `claimCreateDate:${sortByDate}`,
+				  }
+				: {
+						filter: filtered,
+						page: '0',
+						pageSize: '0',
+						sort: `claimCreateDate:${sortByDate}`,
+				  };
+
+		return parameters;
+	};
+
+	const [parameters, setParameters] = useState<Parameters>(
+		generateParameters()
+	);
+
+	const conditionalFilters = () => {
+		setPage(1);
+
+		if (searchInput) {
+			return setParameters(generateParameters(filterSearch));
+		}
+	};
+
+	parameters.pageSize = pageSize.toString();
+	parameters.page = page.toString();
+
+	const handleClick = () => {
+		conditionalFilters();
+	};
+
+	const handleChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchInput(event.target.value);
+	};
 
 	const HEADERS = [
 		{
@@ -51,7 +97,7 @@ const ClaimsTable = () => {
 		},
 		{
 			bold: true,
-			key: 'externalReferenceCode',
+			key: 'id',
 			type: 'link',
 			value: 'Claim Number',
 		},
@@ -89,12 +135,12 @@ const ClaimsTable = () => {
 		claimCreateDate: string;
 		claimStatus: {name: string};
 		externalReferenceCode: string;
-		r_policyToClaims_c_raylifePolicyERC: string;
-	};
-
-	type PolicyDataType = {
-		policyOwnerName: string;
-		productName: string;
+		id: string;
+		r_policyToClaims_c_raylifePolicy: {
+			externalReferenceCode: string;
+			policyOwnerName: string;
+			productName: string;
+		};
 	};
 
 	const handleDeleteClaim = (externalReferenceCode: string) => {
@@ -112,62 +158,93 @@ const ClaimsTable = () => {
 		alert(`Edit ${externalReferenceCode} Action`);
 	};
 
-	useEffect(() => {
-		getClaims(PARAMETERS).then((results) => {
-			const claimList: TableContentType[] = [];
-			results?.data?.items?.forEach(
-				async ({
-					claimCreateDate,
-					claimStatus,
-					externalReferenceCode,
-					r_policyToClaims_c_raylifePolicyERC,
-				}: ClaimTableType) => {
-					const policyElement = await getPolicyByExternalReferenceCode<
-						PolicyDataType
-					>(r_policyToClaims_c_raylifePolicyERC);
+	const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
+		if (event.key === 'Enter') {
+			handleClick();
+		}
+	};
 
-					const policyOwnerName =
-						policyElement?.data?.policyOwnerName;
+	const getClaimsAndPolicies = useCallback(async () => {
+		const claimList: TableContentType[] = [];
 
-					const productName = policyElement?.data?.productName;
+		const results = await getClaims(generateParameters(filterSearch));
 
-					claimList.push({
-						claimCreateDate: formatDate(
-							new Date(claimCreateDate),
-							true
-						),
-						claimName: policyOwnerName,
-						claimStatus: claimStatus?.name,
-						key: externalReferenceCode,
-						policyNumber: r_policyToClaims_c_raylifePolicyERC,
-						productName,
-					});
-				}
-			);
+		for (const result of results?.data?.items as ClaimTableType[]) {
+			const {
+				claimCreateDate,
+				claimStatus,
+				externalReferenceCode,
+				id,
+				r_policyToClaims_c_raylifePolicy,
+			} = result;
 
-			setDataClaims(claimList);
+			claimList.push({
+				claimCreateDate: formatDate(new Date(claimCreateDate), true),
+				claimName: r_policyToClaims_c_raylifePolicy?.policyOwnerName,
+				claimStatus: claimStatus?.name,
+				id,
+				key: externalReferenceCode,
+				policyNumber:
+					r_policyToClaims_c_raylifePolicy?.externalReferenceCode,
+				productName: r_policyToClaims_c_raylifePolicy?.productName,
+			});
+		}
 
-			const totalCount = results?.data?.totalCount;
-			setTotalCount(totalCount);
+		setDataClaims(claimList);
 
-			const totalPages = Math.ceil(totalCount / pageSize);
-			setTotalPages(totalPages);
+		const totalCount = results?.data?.totalCount;
+		setTotalCount(totalCount);
 
-			const firstPaginationLabel = (page - 1) * pageSize + 1;
-			setFirstPaginationLabel(firstPaginationLabel);
+		const totalPages = Math.ceil(totalCount / pageSize);
+		setTotalPages(totalPages);
 
-			const secondPaginationLabel =
-				totalCount > page * pageSize ? page * pageSize : totalCount;
-			setSecondPaginationLabel(secondPaginationLabel);
-		});
+		const firstPaginationLabel = (page - 1) * pageSize + 1;
+		setFirstPaginationLabel(firstPaginationLabel);
+
+		const secondPaginationLabel =
+			totalCount > page * pageSize ? page * pageSize : totalCount;
+		setSecondPaginationLabel(secondPaginationLabel);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, setPage]);
+	}, [filterSearch, page, pageSize, sortByDate]);
+
+	useEffect(() => {
+		getClaimsAndPolicies();
+	}, [sortByDate, getClaimsAndPolicies, page, pageSize]);
+
+	const setSortRule = () => {
+		sortByDate === 'desc' ? setSortByDate('asc') : setSortByDate('desc');
+	};
 
 	const title = `Claims (${totalCount})`;
 
 	return (
 		<div className="px-3">
-			<Header className="mb-5 pt-3" title={title} />
+			<div className="d-flex justify-content-between responsive-search">
+				<Header className="mb-5 pt-3" title={title} />
+
+				<ClayForm.Group className="flex-row mt-3 px-3">
+					<ClayInput.Group className="justify-content-between">
+						<ClayInput.GroupItem prepend>
+							<ClayInput
+								onChange={handleChangeSearch}
+								onKeyDown={handleKeyDown}
+								placeholder="Search for..."
+								type="text"
+							/>
+						</ClayInput.GroupItem>
+
+						<ClayInput.GroupItem append shrink>
+							<ClayButton
+								displayType="secondary"
+								onClick={handleClick}
+								type="submit"
+							>
+								<ClayIcon symbol="search" />
+							</ClayButton>
+						</ClayInput.GroupItem>
+					</ClayInput.Group>
+				</ClayForm.Group>
+			</div>
 
 			<Table
 				actions={[
@@ -179,6 +256,8 @@ const ClaimsTable = () => {
 				]}
 				data={dataClaims}
 				headers={HEADERS}
+				setSortByDate={setSortRule}
+				sortByDate={sortByDate}
 			/>
 
 			<div className="d-flex justify-content-between mt-3 px-3">
