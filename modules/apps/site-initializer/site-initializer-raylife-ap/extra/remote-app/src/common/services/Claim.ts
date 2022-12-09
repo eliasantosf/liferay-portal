@@ -18,6 +18,8 @@ import {axios} from './liferay/api';
 const DeliveryAPI = 'o/c/raylifeclaims';
 
 export function getClaims(parameters: Parameters = {}) {
+	// eslint-disable-next-line no-console
+	console.log('parameters :>> ', parameters);
 	const parametersList = Object.keys(parameters);
 	if (parametersList.length) {
 		return axios.get(
