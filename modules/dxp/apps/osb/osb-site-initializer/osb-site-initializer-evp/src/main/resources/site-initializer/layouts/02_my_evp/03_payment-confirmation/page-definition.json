@@ -1,0 +1,292 @@
+{
+	"pageElement": {
+		"pageElements": [
+			{
+				"definition": {
+					"fragmentStyle": {
+						"borderRadius": "",
+						"borderWidth": "0",
+						"marginLeft": "10",
+						"marginRight": "10",
+						"shadow": "",
+						"textAlign": ""
+					},
+					"indexed": true,
+					"layout": {
+						"borderWidth": 0,
+						"marginBottom": 0,
+						"marginLeft": 0,
+						"marginRight": 0,
+						"marginTop": 0,
+						"opacity": 100,
+						"paddingBottom": 0,
+						"paddingLeft": 0,
+						"paddingRight": 0,
+						"paddingTop": 0,
+						"widthType": "Fluid"
+					},
+					"name": "EVP Invoice Container"
+				},
+				"pageElements": [
+					{
+						"definition": {
+							"fragmentStyle": {
+								"borderWidth": "0"
+							},
+							"indexed": true,
+							"layout": {
+								"borderWidth": 0,
+								"marginBottom": 0,
+								"marginLeft": 0,
+								"marginRight": 0,
+								"marginTop": 0,
+								"opacity": 100,
+								"paddingBottom": 0,
+								"paddingLeft": 0,
+								"paddingRight": 0,
+								"paddingTop": 0,
+								"widthType": "Fluid"
+							}
+						},
+						"pageElements": [
+							{
+								"definition": {
+									"formConfig": {
+										"formReference": {
+											"className": "com.liferay.object.model.ObjectDefinition#[$OBJECT_DEFINITION_ID:EVPPaymentConfirmation$]",
+											"classType": 0
+										}
+									},
+									"indexed": true,
+									"layout": {
+										"widthType": "Fluid"
+									}
+								},
+								"pageElements": [
+									{
+										"definition": {
+											"fragment": {
+												"key": "INPUTS-date-input"
+											},
+											"fragmentConfig": {
+												"inputFieldId": "ObjectField_paymentDate"
+											},
+											"fragmentFields": [],
+											"indexed": true
+										},
+										"type": "Fragment"
+									},
+									{
+										"definition": {
+											"fragment": {
+												"key": "INPUTS-numeric-input"
+											},
+											"fragmentConfig": {
+												"placeholder": "",
+												"inputFieldId": "ObjectField_paymentValue"
+											},
+											"fragmentFields": [],
+											"indexed": true
+										},
+										"type": "Fragment"
+									},
+									{
+										"definition": {
+											"fragment": {
+												"key": "INPUTS-file-upload"
+											},
+											"fragmentConfig": {
+												"buttonText": "Select File",
+												"showSupportedFileInfo": true,
+												"inputFieldId": "ObjectField_uploadFile"
+											},
+											"fragmentFields": [],
+											"indexed": true
+										},
+										"type": "Fragment"
+									},
+									{
+										"definition": {
+											"gutters": true,
+											"indexed": true,
+											"modulesPerRow": 2,
+											"numberOfColumns": 2,
+											"reverseOrder": false,
+											"rowViewports": [
+												{
+													"id": "landscapeMobile",
+													"rowViewportDefinition": {
+														"modulesPerRow": 1
+													}
+												},
+												{
+													"id": "portraitMobile",
+													"rowViewportDefinition": {}
+												},
+												{
+													"id": "tablet",
+													"rowViewportDefinition": {}
+												}
+											],
+											"verticalAlignment": "top"
+										},
+										"pageElements": [
+											{
+												"definition": {
+													"columnViewports": [
+														{
+															"columnViewportDefinition": {
+																"size": 12
+															},
+															"id": "landscapeMobile"
+														},
+														{
+															"columnViewportDefinition": {},
+															"id": "portraitMobile"
+														},
+														{
+															"columnViewportDefinition": {},
+															"id": "tablet"
+														}
+													],
+													"size": 6
+												},
+												"pageElements": [
+													{
+														"definition": {
+															"fragment": {
+																"key": "INPUTS-submit-button"
+															},
+															"fragmentConfig": {
+																"buttonType": "primary",
+																"buttonSize": "nm"
+															},
+															"fragmentFields": [
+																{
+																	"id": "submit-button-text",
+																	"value": {
+																		"fragmentLink": {},
+																		"text": {
+																			"value_i18n": {
+																				"en_US": "Send"
+																			}
+																		}
+																	}
+																}
+															],
+															"fragmentStyle": {
+																"borderRadius": "",
+																"marginTop": "3",
+																"shadow": "",
+																"textAlign": ""
+															},
+															"indexed": true
+														},
+														"type": "Fragment"
+													}
+												],
+												"type": "Column"
+											},
+											{
+												"definition": {
+													"columnViewports": [
+														{
+															"columnViewportDefinition": {
+																"size": 12
+															},
+															"id": "landscapeMobile"
+														},
+														{
+															"columnViewportDefinition": {},
+															"id": "portraitMobile"
+														},
+														{
+															"columnViewportDefinition": {},
+															"id": "tablet"
+														}
+													],
+													"size": 6
+												},
+												"pageElements": [
+													{
+														"definition": {
+															"fragment": {
+																"key": "DIALECT-dialect-button"
+															},
+															"fragmentConfig": {
+																"uppercase": false,
+																"style": "neutral",
+																"type": "ghost",
+																"inverted": false,
+																"buttonSize": ""
+															},
+															"fragmentFields": [
+																{
+																	"id": "link",
+																	"value": {
+																		"fragmentLink": {
+																			"value": {
+																				"href": {
+																					"mapping": {
+																						"itemReference": {
+																							"className": "com.liferay.portal.kernel.model.Layout",
+																							"fields": [
+																								{
+																									"fieldName": "friendlyURL",
+																									"fieldValue": "/my-evp"
+																								},
+																								{
+																									"fieldName": "privatePage",
+																									"fieldValue": "false"
+																								},
+																								{
+																									"fieldName": "siteKey",
+																									"fieldValue": "evp"
+																								}
+																							]
+																						}
+																					}
+																				}
+																			}
+																		},
+																		"text": {
+																			"value_i18n": {
+																				"en_US": "Back"
+																			}
+																		}
+																	}
+																}
+															],
+															"fragmentStyle": {
+																"marginLeft": "10",
+																"marginTop": "3"
+															},
+															"indexed": true
+														},
+														"type": "Fragment"
+													}
+												],
+												"type": "Column"
+											}
+										],
+										"type": "Row"
+									}
+								],
+								"type": "Form"
+							}
+						],
+						"type": "Section"
+					}
+				],
+				"type": "Section"
+			}
+		],
+		"type": "Root"
+	},
+	"settings": {
+		"masterPage": {
+			"key": "main-template"
+		}
+	},
+	"version": 1.1
+}

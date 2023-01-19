@@ -1,0 +1,249 @@
+{
+    "enableComments": false,
+    "objectRelationships": [
+        {
+            "parameterObjectFieldName": "",
+            "parameterObjectFieldId": 0,
+            "label": {
+                "en_US": "Invoice"
+            },
+            "reverse": false,
+            "type": "oneToMany",
+            "name": "invoice",
+            "deletionType": "prevent",
+            "objectDefinitionExternalReferenceCode1": "c7c47090-bbed-ee43-5ce1-c2fdd4148436",
+            "objectDefinitionExternalReferenceCode2": "2e926555-57d1-59bb-b5ba-f009c8a18de2",
+            "objectDefinitionName2": "EVPRequest"
+        }
+    ],
+    "enableCategorization": true,
+    "accountEntryRestrictedObjectFieldName": "",
+    "objectActions": [],
+    "accountEntryRestricted": false,
+    "externalReferenceCode": "c7c47090-bbed-ee43-5ce1-c2fdd4148436",
+    "objectFields": [
+        {
+            "listTypeDefinitionExternalReferenceCode": "",
+            "indexed": false,
+            "defaultValue": "",
+            "objectFieldSettings": [],
+            "DBType": "Date",
+            "label": {
+                "en_US": "Create Date"
+            },
+            "type": "Date",
+            "required": false,
+            "externalReferenceCode": "b5974408-457e-9fb2-1de2-f1f63c3b8129",
+            "indexedAsKeyword": false,
+            "system": true,
+            "indexedLanguageId": "",
+            "name": "createDate",
+            "state": false,
+            "businessType": "Date"
+        },
+        {
+            "listTypeDefinitionExternalReferenceCode": "",
+            "indexed": false,
+            "defaultValue": "",
+            "objectFieldSettings": [],
+            "DBType": "String",
+            "label": {
+                "en_US": "Author"
+            },
+            "type": "String",
+            "required": false,
+            "externalReferenceCode": "36206c68-3855-74d2-2a57-5bf196709a3d",
+            "indexedAsKeyword": false,
+            "system": true,
+            "indexedLanguageId": "",
+            "name": "creator",
+            "state": false,
+            "businessType": "Text"
+        },
+        {
+            "listTypeDefinitionExternalReferenceCode": "",
+            "indexed": false,
+            "defaultValue": "",
+            "objectFieldSettings": [],
+            "DBType": "String",
+            "label": {
+                "en_US": "External Reference Code"
+            },
+            "type": "String",
+            "required": false,
+            "externalReferenceCode": "b8fd4a59-b714-899e-3095-ce77a3f01992",
+            "indexedAsKeyword": false,
+            "system": true,
+            "indexedLanguageId": "",
+            "name": "externalReferenceCode",
+            "state": false,
+            "businessType": "Text"
+        },
+        {
+            "listTypeDefinitionExternalReferenceCode": "",
+            "indexed": true,
+            "defaultValue": "",
+            "objectFieldSettings": [],
+            "DBType": "Long",
+            "label": {
+                "en_US": "ID"
+            },
+            "type": "Long",
+            "required": false,
+            "externalReferenceCode": "31b218fe-aa72-822e-b82f-3b79a5a8310b",
+            "indexedAsKeyword": true,
+            "system": true,
+            "indexedLanguageId": "",
+            "name": "id",
+            "state": false,
+            "businessType": "LongInteger"
+        },
+        {
+            "listTypeDefinitionExternalReferenceCode": "",
+            "indexed": false,
+            "defaultValue": "",
+            "objectFieldSettings": [],
+            "DBType": "Date",
+            "label": {
+                "en_US": "Modified Date"
+            },
+            "type": "Date",
+            "required": false,
+            "externalReferenceCode": "e3c6a699-784b-a7cc-4eca-a70ea72898c9",
+            "indexedAsKeyword": false,
+            "system": true,
+            "indexedLanguageId": "",
+            "name": "modifiedDate",
+            "state": false,
+            "businessType": "Date"
+        },
+        {
+            "listTypeDefinitionExternalReferenceCode": "",
+            "indexed": true,
+            "defaultValue": "",
+            "objectFieldSettings": [],
+            "DBType": "Date",
+            "label": {
+                "en_US": "Payment Date"
+            },
+            "type": "Date",
+            "required": true,
+            "externalReferenceCode": "ca8c94f3-57a1-8a50-3855-8bc8ea554ca5",
+            "indexedAsKeyword": false,
+            "system": false,
+            "indexedLanguageId": "",
+            "name": "paymentDate",
+            "state": false,
+            "businessType": "Date"
+        },
+        {
+            "listTypeDefinitionExternalReferenceCode": "",
+            "indexed": true,
+            "defaultValue": "",
+            "objectFieldSettings": [],
+            "DBType": "Integer",
+            "label": {
+                "en_US": "Payment Value"
+            },
+            "type": "Integer",
+            "required": true,
+            "externalReferenceCode": "77ad0b88-4e29-e0b5-0216-ec6bb07258d7",
+            "indexedAsKeyword": false,
+            "system": false,
+            "indexedLanguageId": "",
+            "name": "paymentValue",
+            "state": false,
+            "businessType": "Integer"
+        },
+        {
+            "listTypeDefinitionExternalReferenceCode": "",
+            "indexed": false,
+            "defaultValue": "",
+            "objectFieldSettings": [],
+            "DBType": "String",
+            "label": {
+                "en_US": "Status"
+            },
+            "type": "String",
+            "required": false,
+            "externalReferenceCode": "14cab369-5052-a4e6-83f0-f764709d8757",
+            "indexedAsKeyword": false,
+            "system": true,
+            "indexedLanguageId": "",
+            "name": "status",
+            "state": false,
+            "businessType": "Text"
+        },
+        {
+            "listTypeDefinitionExternalReferenceCode": "",
+            "indexed": true,
+            "defaultValue": "",
+            "objectFieldSettings": [
+                {
+                    "name": "acceptedFileExtensions",
+                    "value": "jpeg, jpg, pdf, png"
+                },
+                {
+                    "name": "maximumFileSize",
+                    "value": "100"
+                },
+                {
+                    "name": "fileSource",
+                    "value": "userComputer"
+                },
+                {
+                    "name": "showFilesInDocumentsAndMedia",
+                    "value": "true"
+                },
+                {
+                    "name": "storageDLFolderPath",
+                    "value": "/PaymentConfirmation"
+                }
+            ],
+            "DBType": "Long",
+            "label": {
+                "en_US": "Upload File"
+            },
+            "type": "Long",
+            "required": true,
+            "externalReferenceCode": "82353354-18c6-e419-85d7-c7da1190cfb2",
+            "indexedAsKeyword": false,
+            "system": false,
+            "indexedLanguageId": "en_US",
+            "name": "uploadFile",
+            "state": false,
+            "businessType": "Attachment"
+        }
+    ],
+    "restContextPath": "/o/c/paymentconfirmations",
+    "scope": "company",
+    "portlet": false,
+    "parameterRequired": false,
+    "enableObjectEntryHistory": false,
+    "titleObjectFieldName": "id",
+    "active": true,
+    "defaultLanguageId": "en_US",
+    "label": {
+        "en_US": "EVP Payment Confirmation"
+    },
+    "panelCategoryKey": "control_panel.object",
+    "pluralLabel": {
+        "en_US": "EVP Payment Confirmations"
+    },
+    "objectLayouts": [],
+    "system": false,
+    "objectViews": [],
+    "name": "PaymentConfirmation",
+    "storageType": "default",
+    "actions": {
+        "permissions": {},
+        "get": {},
+        "update": {},
+        "delete": {}
+    },
+    "status": {
+        "label_i18n": "Approved",
+        "code": 0,
+        "label": "approved"
+    }
+}

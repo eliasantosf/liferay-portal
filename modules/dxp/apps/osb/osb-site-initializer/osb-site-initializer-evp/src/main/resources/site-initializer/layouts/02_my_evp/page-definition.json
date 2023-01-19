@@ -57,11 +57,11 @@
 										"key": "DIALECT-dialect-button"
 									},
 									"fragmentConfig": {
-										"buttonSize": "",
-										"inverted": false,
+										"uppercase": false,
 										"style": "primary",
 										"type": "solid",
-										"uppercase": false
+										"inverted": false,
+										"buttonSize": ""
 									},
 									"fragmentFields": [
 										{
@@ -84,7 +84,7 @@
 																		},
 																		{
 																			"fieldName": "siteKey",
-																			"fieldValue": "EVP"
+																			"fieldValue": "evp"
 																		}
 																	]
 																}
@@ -116,11 +116,11 @@
 										"key": "DIALECT-dialect-button"
 									},
 									"fragmentConfig": {
-										"buttonSize": "",
-										"inverted": false,
+										"uppercase": false,
 										"style": "primary",
 										"type": "solid",
-										"uppercase": false
+										"inverted": false,
+										"buttonSize": ""
 									},
 									"fragmentFields": [
 										{
@@ -143,7 +143,7 @@
 																		},
 																		{
 																			"fieldName": "siteKey",
-																			"fieldValue": "EVP"
+																			"fieldValue": "evp"
 																		}
 																	]
 																}
@@ -169,7 +169,10 @@
 					{
 						"definition": {
 							"fragmentStyle": {
-								"borderWidth": "0"
+								"borderRadius": "",
+								"borderWidth": "0",
+								"shadow": "",
+								"textAlign": ""
 							},
 							"indexed": true,
 							"layout": {
@@ -267,8 +270,7 @@
 														{
 															"id": "element-text",
 															"value": {
-																"fragmentLink": {
-																},
+																"fragmentLink": {},
 																"text": {
 																	"value_i18n": {
 																		"en_US": "Request Id"
@@ -278,7 +280,10 @@
 														}
 													],
 													"fragmentStyle": {
-														"fontWeight": "fontWeightBold"
+														"borderRadius": "",
+														"fontWeight": "fontWeightBold",
+														"shadow": "",
+														"textAlign": ""
 													},
 													"indexed": true
 												},
@@ -291,17 +296,30 @@
 										"definition": {
 											"fragmentStyle": {
 												"borderColor": "colorNeutral4",
+												"borderRadius": "",
+												"borderWidth": "0",
 												"height": "65px",
 												"maxWidth": "12%",
 												"paddingLeft": "2",
+												"shadow": "",
+												"textAlign": "",
 												"width": "12%"
 											},
 											"indexed": true,
 											"layout": {
 												"align": "Center",
 												"borderColor": "colorNeutral4",
+												"borderWidth": 0,
 												"contentDisplay": "FlexRow",
+												"marginBottom": 0,
+												"marginLeft": 0,
+												"marginRight": 0,
+												"marginTop": 0,
 												"opacity": 100,
+												"paddingBottom": 0,
+												"paddingLeft": 0,
+												"paddingRight": 0,
+												"paddingTop": 0,
 												"widthType": "Fluid"
 											}
 										},
@@ -319,8 +337,7 @@
 														{
 															"id": "element-text",
 															"value": {
-																"fragmentLink": {
-																},
+																"fragmentLink": {},
 																"text": {
 																	"value_i18n": {
 																		"en_US": "Request Type"
@@ -350,6 +367,8 @@
 												"borderWidth": "0",
 												"height": "65px",
 												"maxWidth": "18%",
+												"shadow": "",
+												"textAlign": "",
 												"width": "15%"
 											},
 											"indexed": true,
@@ -384,8 +403,7 @@
 														{
 															"id": "element-text",
 															"value": {
-																"fragmentLink": {
-																},
+																"fragmentLink": {},
 																"text": {
 																	"value_i18n": {
 																		"en_US": "Organization"
@@ -415,6 +433,8 @@
 												"borderWidth": "0",
 												"height": "65px",
 												"maxWidth": "16%",
+												"shadow": "",
+												"textAlign": "",
 												"width": "14%"
 											},
 											"indexed": true,
@@ -449,8 +469,7 @@
 														{
 															"id": "element-text",
 															"value": {
-																"fragmentLink": {
-																},
+																"fragmentLink": {},
 																"text": {
 																	"value_i18n": {
 																		"en_US": "Grant Type"
@@ -480,6 +499,8 @@
 												"borderWidth": "0",
 												"height": "65px",
 												"maxWidth": "12%",
+												"shadow": "",
+												"textAlign": "",
 												"width": "11%"
 											},
 											"indexed": true,
@@ -514,8 +535,7 @@
 														{
 															"id": "element-text",
 															"value": {
-																"fragmentLink": {
-																},
+																"fragmentLink": {},
 																"text": {
 																	"value_i18n": {
 																		"en_US": "Grant Value"
@@ -545,6 +565,8 @@
 												"borderWidth": "0",
 												"height": "65px",
 												"maxWidth": "16%",
+												"shadow": "",
+												"textAlign": "",
 												"width": "12%"
 											},
 											"indexed": true,
@@ -579,8 +601,7 @@
 														{
 															"id": "element-text",
 															"value": {
-																"fragmentLink": {
-																},
+																"fragmentLink": {},
 																"text": {
 																	"value_i18n": {
 																		"en_US": "Service Hours"
@@ -610,6 +631,8 @@
 												"borderWidth": "0",
 												"height": "65px",
 												"maxWidth": "18%",
+												"shadow": "",
+												"textAlign": "",
 												"width": "16%"
 											},
 											"indexed": true,
@@ -644,8 +667,7 @@
 														{
 															"id": "element-text",
 															"value": {
-																"fragmentLink": {
-																},
+																"fragmentLink": {},
 																"text": {
 																	"value_i18n": {
 																		"en_US": "Status"
@@ -686,33 +708,27 @@
 											"id": "landscapeMobile"
 										},
 										{
-											"collectionViewportDefinition": {
-											},
+											"collectionViewportDefinition": {},
 											"id": "portraitMobile"
 										},
 										{
-											"collectionViewportDefinition": {
-											},
+											"collectionViewportDefinition": {},
 											"id": "tablet"
 										}
 									],
 									"displayAllItems": false,
 									"displayAllPages": true,
-									"listItemStyle": "",
-									"listStyle": "",
 									"numberOfColumns": 1,
 									"numberOfItems": 5,
 									"numberOfItemsPerPage": 10,
 									"numberOfPages": 5,
 									"paginationType": "Numeric",
-									"showAllItems": false,
-									"templateKey": ""
+									"showAllItems": false
 								},
 								"pageElements": [
 									{
 										"definition": {
-											"collectionItemConfig": {
-											}
+											"collectionItemConfig": {}
 										},
 										"pageElements": [
 											{
@@ -792,8 +808,7 @@
 																		{
 																			"id": "element-text",
 																			"value": {
-																				"fragmentLink": {
-																				},
+																				"fragmentLink": {},
 																				"text": {
 																					"mapping": {
 																						"fieldKey": "ObjectEntry_objectEntryId",
@@ -815,16 +830,29 @@
 													{
 														"definition": {
 															"fragmentStyle": {
+																"borderRadius": "",
+																"borderWidth": "0",
 																"height": "65px",
 																"maxWidth": "12%",
 																"paddingLeft": "2",
+																"shadow": "",
+																"textAlign": "",
 																"width": "12%"
 															},
 															"indexed": true,
 															"layout": {
 																"align": "Center",
+																"borderWidth": 0,
 																"contentDisplay": "FlexRow",
+																"marginBottom": 0,
+																"marginLeft": 0,
+																"marginRight": 0,
+																"marginTop": 0,
 																"opacity": 100,
+																"paddingBottom": 0,
+																"paddingLeft": 0,
+																"paddingRight": 0,
+																"paddingTop": 0,
 																"widthType": "Fluid"
 															}
 														},
@@ -842,8 +870,7 @@
 																		{
 																			"id": "element-text",
 																			"value": {
-																				"fragmentLink": {
-																				},
+																				"fragmentLink": {},
 																				"text": {
 																					"mapping": {
 																						"fieldKey": "ObjectField_requestType",
@@ -869,6 +896,8 @@
 																"borderWidth": "0",
 																"height": "65px",
 																"maxWidth": "18%",
+																"shadow": "",
+																"textAlign": "",
 																"width": "15%"
 															},
 															"indexed": true,
@@ -902,8 +931,7 @@
 																		{
 																			"id": "element-text",
 																			"value": {
-																				"fragmentLink": {
-																				},
+																				"fragmentLink": {},
 																				"text": {
 																					"mapping": {
 																						"fieldKey": "ObjectField_r_organization_c_evpOrganizationId",
@@ -929,6 +957,8 @@
 																"borderWidth": "0",
 																"height": "65px",
 																"maxWidth": "16%",
+																"shadow": "",
+																"textAlign": "",
 																"width": "14%"
 															},
 															"indexed": true,
@@ -962,8 +992,7 @@
 																		{
 																			"id": "element-text",
 																			"value": {
-																				"fragmentLink": {
-																				},
+																				"fragmentLink": {},
 																				"text": {
 																					"mapping": {
 																						"fieldKey": "ObjectField_grantRequestType",
@@ -989,6 +1018,8 @@
 																"borderWidth": "0",
 																"height": "65px",
 																"maxWidth": "12%",
+																"shadow": "",
+																"textAlign": "",
 																"width": "11%"
 															},
 															"indexed": true,
@@ -1022,8 +1053,7 @@
 																		{
 																			"id": "element-text",
 																			"value": {
-																				"fragmentLink": {
-																				},
+																				"fragmentLink": {},
 																				"text": {
 																					"mapping": {
 																						"fieldKey": "ObjectField_grantAmount",
@@ -1049,6 +1079,8 @@
 																"borderWidth": "0",
 																"height": "65px",
 																"maxWidth": "16%",
+																"shadow": "",
+																"textAlign": "",
 																"width": "12%"
 															},
 															"indexed": true,
@@ -1082,8 +1114,7 @@
 																		{
 																			"id": "element-text",
 																			"value": {
-																				"fragmentLink": {
-																				},
+																				"fragmentLink": {},
 																				"text": {
 																					"mapping": {
 																						"fieldKey": "ObjectField_totalHoursRequested",
@@ -1110,6 +1141,8 @@
 																"height": "65px",
 																"maxWidth": "18%",
 																"paddingRight": "2",
+																"shadow": "",
+																"textAlign": "",
 																"width": "16%"
 															},
 															"indexed": true,
@@ -1144,8 +1177,7 @@
 																		{
 																			"id": "element-text",
 																			"value": {
-																				"fragmentLink": {
-																				},
+																				"fragmentLink": {},
 																				"text": {
 																					"mapping": {
 																						"fieldKey": "ObjectField_requestStatus",
@@ -1170,7 +1202,8 @@
 																"borderRadius": "",
 																"borderWidth": "0",
 																"height": "65px",
-																"maxWidth": "8%",
+																"maxWidth": "18%",
+																"paddingRight": "2",
 																"shadow": "",
 																"textAlign": "",
 																"width": "8%"
@@ -1180,7 +1213,7 @@
 																"align": "Center",
 																"borderWidth": 0,
 																"contentDisplay": "FlexRow",
-																"justify": "Center",
+																"flexWrap": "Wrap",
 																"marginBottom": 0,
 																"marginLeft": 0,
 																"marginRight": 0,
@@ -1197,39 +1230,11 @@
 															{
 																"definition": {
 																	"fragment": {
-																		"key": "DIALECT-dialect-button"
+																		"key": "evp-request-list-action",
+																		"siteKey": "evp"
 																	},
-																	"fragmentConfig": {
-																		"buttonSize": "btn-sm",
-																		"inverted": false,
-																		"style": "primary",
-																		"type": "ghost",
-																		"uppercase": false
-																	},
-																	"fragmentFields": [
-																		{
-																			"id": "link",
-																			"value": {
-																				"fragmentLink": {
-																					"value": {
-																						"href": {
-																							"mapping": {
-																								"fieldKey": "ObjectEntry_displayPageURL",
-																								"itemReference": {
-																									"contextSource": "CollectionItem"
-																								}
-																							}
-																						}
-																					}
-																				},
-																				"text": {
-																					"value_i18n": {
-																						"en_US": "Details"
-																					}
-																				}
-																			}
-																		}
-																	],
+																	"fragmentConfig": {},
+																	"fragmentFields": [],
 																	"indexed": true
 																},
 																"type": "Fragment"
