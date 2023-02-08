@@ -89,7 +89,7 @@ const GenerateReport = () => {
 		return true;
 	};
 
-	const constructionFieldsCsv = (fields: RequestType) => {
+	const constructionFieldsCsv = (fields: RequestType[]) => {
 		let fieldsCsv = '';
 
 		const headers = [

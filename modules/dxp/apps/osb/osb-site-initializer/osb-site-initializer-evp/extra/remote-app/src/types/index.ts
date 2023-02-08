@@ -36,6 +36,7 @@ export type OrganizationFilterType = {
 	state: string;
 	status: string[];
 	street: string;
+	taxId: number;
 	taxIdentificationNumber: string;
 	zip: string;
 };
@@ -76,7 +77,7 @@ export type RequestType = {
 	externalReferenceCode: string;
 	fullName: string;
 	grantAmount: number;
-	grantRequestType: {key: string; value: string};
+	grantRequestType: {name: string};
 	id: number;
 	liferayBranch: {key: string; value: string};
 	managerEmailAddress: string;
@@ -89,7 +90,7 @@ export type RequestType = {
 	requestDescription: string;
 	requestPurposes: {key: string; value: string};
 	requestStatus: {key: string; value: string};
-	requestType: {key: string; value: string};
+	requestType: {name: string};
 	scopeKey: string;
 	startDate: string;
 	status: string;
