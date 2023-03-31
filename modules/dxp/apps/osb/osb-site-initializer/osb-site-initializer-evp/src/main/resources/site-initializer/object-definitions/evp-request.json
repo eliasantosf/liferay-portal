@@ -152,8 +152,8 @@
 			"type": "Date"
 		},
 		{
-			"DBType": "Long",
-			"businessType": "LongInteger",
+			"DBType": "BigDecimal",
+			"businessType": "PrecisionDecimal",
 			"defaultValue": "",
 			"indexed": true,
 			"indexedAsKeyword": false,
@@ -167,7 +167,7 @@
 			"required": false,
 			"state": false,
 			"system": false,
-			"type": "Long"
+			"type": "BigDecimal"
 		},
 		{
 			"DBType": "String",
@@ -183,8 +183,8 @@
 			"type": "String"
 		},
 		{
-			"DBType": "Long",
-			"businessType": "LongInteger",
+			"DBType": "BigDecimal",
+			"businessType": "PrecisionDecimal",
 			"defaultValue": "",
 			"indexed": false,
 			"indexedAsKeyword": false,
@@ -198,7 +198,7 @@
 			"required": false,
 			"state": false,
 			"system": false,
-			"type": "Long"
+			"type": "BigDecimal"
 		},
 		{
 			"DBType": "String",

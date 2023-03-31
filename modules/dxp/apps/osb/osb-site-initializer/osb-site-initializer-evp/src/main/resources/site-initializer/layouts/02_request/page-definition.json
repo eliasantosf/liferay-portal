@@ -816,6 +816,9 @@
 														"pageElements": [
 															{
 																"definition": {
+																	"cssClasses": [
+																		"grantAndServiceValue"
+																	],
 																	"fragment": {
 																		"key": "DIALECT-dialect-text"
 																	},
@@ -865,6 +868,9 @@
 														"pageElements": [
 															{
 																"definition": {
+																	"cssClasses": [
+																		"grantAndServiceValue"
+																	],
 																	"fragment": {
 																		"key": "DIALECT-dialect-text"
 																	},
@@ -989,6 +995,20 @@
 									}
 								],
 								"type": "Collection"
+							},
+							{
+								"definition": {
+									"fragment": {
+										"key": "evp-request-number-formatter",
+										"siteKey": "EVP"
+									},
+									"fragmentConfig": {
+									},
+									"fragmentFields": [
+									],
+									"indexed": true
+								},
+								"type": "Fragment"
 							}
 						],
 						"type": "Section"
