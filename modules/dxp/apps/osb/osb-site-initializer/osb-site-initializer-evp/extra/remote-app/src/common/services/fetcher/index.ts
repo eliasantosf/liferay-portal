@@ -15,7 +15,8 @@ import FetcherError from './FetchError';
 const liferayHost = window.location.origin;
 
 function changeResource(resource: RequestInfo) {
-	const headlessAdminUserAPIs = ['account', 'roles', 'user-groups'];
+	const headlessAdminUserAPIs = ['roles', 'user-groups'];
+	
 
 	const headlessDeliveryAPIs = [
 		'message-board-messages',

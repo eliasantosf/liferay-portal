@@ -13,6 +13,16 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 const yupSchema = {
+	payment: yup.object({
+		accountNumberCR: yup.string(),
+		accountNumberDB: yup.string(),
+		accountTypeCR: yup.string(),
+		accountTypeDB: yup.string(),
+		entityName: yup.string(),
+		finalPaymentDate: yup.string(),
+		initialPaymentDate: yup.string(),
+		territoryId: yup.string(),
+	}),
 	report: yup.object({
 		finalCompanyId: yup.string(),
 		finalRequestDate: yup.string(),

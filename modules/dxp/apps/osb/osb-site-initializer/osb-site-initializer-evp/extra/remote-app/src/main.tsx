@@ -13,6 +13,7 @@
 import {Root, createRoot} from 'react-dom/client';
 
 import ClayIconProvider from './common/provider/ClayIconProvider';
+import GenerateFinancialReport from './routes/reports/generateFinancialReport';
 import GenerateReport from './routes/reports/generateReport';
 
 import './style/index.css';
@@ -24,6 +25,7 @@ export type EVPComponentType = {
 };
 
 const EVPComponent: EVPComponentType = {
+	'generate-financial-report': <GenerateFinancialReport />,
 	'generate-report': <GenerateReport />,
 	'no-route-selected': <NoRouteSelected />,
 };
