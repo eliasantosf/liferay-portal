@@ -1,0 +1,14 @@
+[
+	{
+		"active": true,
+		"conditionExpression": "requestStatus == 'rejected' OR requestStatus == 'verified' OR requestStatus == 'awaitingMoreInfoFromEmployee' OR requestStatus == 'awaitingFinanceReview'",
+		"externalReferenceCode": "EVP-REQUEST-NOTIFICATION",
+		"label": {
+			"en_US": "EVP Request Update"
+		},
+		"name": "EVPRequestUpdate",
+		"objectActionExecutorKey": "notification",
+		"objectActionTriggerKey": "onAfterUpdate",
+		"objectDefinitionId": "[$OBJECT_DEFINITION_ID:EVPRequest$]"
+	}
+]
