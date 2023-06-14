@@ -1,0 +1,49 @@
+{
+	"objectFields": [
+		{
+			"indexed": true,
+			"objectFieldSettings": [
+				{"name": "acceptedFileExtensions", "value": "pdf"},
+				{"name": "maximumFileSize", "value": 5},
+				{"name": "fileSource", "value": "userComputer"},
+				{"name": "showFilesInDocumentsAndMedia", "value": true},
+				{"name": "storageDLFolderPath", "value": "/EVPUploadReceipt"}
+			],
+			"readOnly": "false",
+			"DBType": "Long",
+			"label": {"en_US": "File"},
+			"type": "Long",
+			"required": true,
+			"indexedAsKeyword": false,
+			"system": false,
+			"indexedLanguageId": "en_US",
+			"name": "file",
+			"state": false,
+			"businessType": "Attachment",
+			"readOnlyConditionExpression": ""
+		},
+		{
+			"indexed": true,
+			"objectFieldSettings": [],
+			"readOnly": "false",
+			"DBType": "BigDecimal",
+			"label": {"en_US": "Receipt Value"},
+			"type": "BigDecimal",
+			"required": true,
+			"externalReferenceCode": "4039dc57-e30e-fec9-46b6-4ccf2f672851",
+			"indexedAsKeyword": false,
+			"system": false,
+			"indexedLanguageId": "",
+			"name": "receiptValue",
+			"state": false,
+			"businessType": "PrecisionDecimal",
+			"readOnlyConditionExpression": ""
+		}
+	],
+	"panelCategoryKey": "control_panel.object",
+	"scope": "company",
+	"titleObjectFieldName": "id",
+	"label": {"en_US": "EVP Upload Receipt"},
+	"pluralLabel": {"en_US": "EVP Upload Receipts"},
+	"name": "EVPUploadReceipt"
+}

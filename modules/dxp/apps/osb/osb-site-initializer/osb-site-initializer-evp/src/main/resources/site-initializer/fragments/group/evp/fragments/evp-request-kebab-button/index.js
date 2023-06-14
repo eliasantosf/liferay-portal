@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable @liferay/portal/no-global-fetch */
 /* eslint-disable no-undef */
 /**
@@ -13,6 +14,10 @@
 
 const ROLE = {
 	FINANCE_USER: 'Finance User',
+};
+
+const REQUEST_STATUS = {
+	SPONSORSHIP: 'sponsorship',
 };
 
 const userRoles = document.querySelector('.userRoles').value;
@@ -51,6 +56,10 @@ const getMessage = () => document.querySelector('#messageDescribed').value;
 const getAttributeHidden = () => document.querySelector('#messageDanger');
 
 const openModal = () => {
+	const grantRequestType = fragmentElement.querySelector(
+		'.grantRequestType'
+	).value;
+
 	const requestName = fragmentElement.querySelector('.requestName').value;
 
 	Liferay.Util.openModal({
@@ -87,16 +96,29 @@ const openModal = () => {
 			{
 				label: 'Approve',
 				async onClick() {
-					const status =
-						userRoles === ROLE.FINANCE_USER
-							? {
-									key: 'awaitingPaymentConfirmation',
-									value: 'Awaiting Payment Confirmation',
-							  }
-							: {
-									key: 'awaitingFinanceReview',
-									value: 'Awaiting Finance Review',
-							  };
+					let status = '';
+					if (userRoles === ROLE.FINANCE_USER) {
+						if (
+							grantRequestType ===
+							REQUEST_STATUS.SPONSORSHIP
+						) {
+							status = {
+								key: 'awaitingEmployeeProofOfExpenses',
+								value: 'Awaiting Employee Proof Of Expenses',
+							};
+						} else {
+							status = {
+								key: 'awaitingPaymentConfirmation',
+								value: 'Awaiting Payment Confirmation',
+							};
+						}
+					} else {
+						status = {
+							key: 'awaitingFinanceReview',
+							value: 'Awaiting Finance Review',
+						};
+					}
+
 					await layerForDendingUpdateStatus(
 						getMessage(),
 						getAttributeHidden(),

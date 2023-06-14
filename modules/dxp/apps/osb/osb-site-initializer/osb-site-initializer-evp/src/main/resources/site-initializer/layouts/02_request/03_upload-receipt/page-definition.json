@@ -1,0 +1,164 @@
+{
+	"pageElement": {
+		"pageElements": [
+			{
+				"definition": {
+					"fragmentStyle": { "marginLeft": "10", "marginRight": "10" },
+					"indexed": true,
+					"layout": {
+						"opacity": 100,
+						"widthType": "Fluid"
+					},
+					"name": "EVP Upload Receipt"
+				},
+				"pageElements": [
+					{
+						"definition": {
+							"indexed": true,
+							"layout": {
+								"opacity": 100,
+								"widthType": "Fluid"
+							},
+							"name": "Breadcrumb container"
+						},
+						"pageElements": [
+							{
+								"definition": {
+									"widgetInstance": {
+										"widgetConfig": {},
+										"widgetName": "com_liferay_site_navigation_breadcrumb_web_portlet_SiteNavigationBreadcrumbPortlet"
+									}
+								},
+								"type": "Widget"
+							}
+						],
+						"type": "Section"
+					},
+					{
+						"definition": {
+							"indexed": true,
+							"layout": {
+								"opacity": 100,
+								"widthType": "Fluid"
+							}
+						},
+						"pageElements": [
+							{
+								"definition": {
+									"indexed": true,
+									"layout": {
+										"opacity": 100,
+										"widthType": "Fluid"
+									}
+								},
+								"pageElements": [
+									{
+										"definition": {
+											"fragment": { "key": "DIALECT-dialect-text" },
+											"fragmentConfig": { "textType": "h1", "truncateText": false },
+											"fragmentFields": [
+												{
+													"id": "element-text",
+													"value": {
+														"fragmentLink": {},
+														"text": { "value_i18n": { "en_US": "Upload Receipt" } }
+													}
+												}
+											],
+											"indexed": true
+										},
+										"type": "Fragment"
+									}
+								],
+								"type": "Section"
+							},
+							{
+								"definition": {
+									"formConfig": {
+										"formReference": {
+											"className": "com.liferay.object.model.ObjectDefinition#[$OBJECT_DEFINITION_ID:EVPUploadReceipt$]",
+											"classType": 0
+										}
+									},
+									"fragmentStyle": { "marginTop": "4" },
+									"indexed": true,
+									"layout": { "widthType": "Fluid" }
+								},
+								"pageElements": [
+									{
+										"definition": {
+											"fragment": { "key": "INPUTS-file-upload" },
+											"fragmentConfig": {
+												"buttonText": "Select File",
+												"showSupportedFileInfo": true,
+												"inputFieldId": "ObjectField_file"
+											},
+											"fragmentFields": [],
+											"indexed": true
+										},
+										"type": "Fragment"
+									},
+									{
+										"definition": {
+											"fragment": { "key": "INPUTS-numeric-input" },
+											"fragmentConfig": {
+												"inputShowHelpText": true,
+												"inputHelpText": {
+													"en_US": "Enter the receipt amount. Eg: 500.5"
+												},
+												"placeholder": "",
+												"inputFieldId": "ObjectField_receiptValue"
+											},
+											"fragmentFields": [],
+											"fragmentStyle": { "marginTop": "3" },
+											"indexed": true
+										},
+										"type": "Fragment"
+									},
+									{
+										"definition": {
+											"fragment": { "key": "INPUTS-submit-button" },
+											"fragmentConfig": {
+												"buttonType": "primary",
+												"buttonSize": "nm"
+											},
+											"fragmentFields": [
+												{
+													"id": "submit-button-text",
+													"value": { "fragmentLink": {} }
+												}
+											],
+											"fragmentStyle": { "marginBottom": "5", "marginTop": "4" },
+											"indexed": true
+										},
+										"type": "Fragment"
+									}
+								],
+								"type": "Form"
+							},
+							{
+								"definition": {
+									"fragment": { "key": "BASIC_COMPONENT-separator" },
+									"fragmentConfig": { "separatorColor": "", "bottomSpacing": "3" },
+									"fragmentFields": [],
+									"fragmentStyle": { "marginBottom": "3" },
+									"indexed": true
+								},
+								"type": "Fragment"
+							}
+						],
+						"type": "Section"
+					}
+				],
+				"type": "Section"
+			}
+		],
+		"type": "Root"
+	},
+	"settings": {
+		"masterPage": {
+			"key": "main-template"
+		}
+	},
+	"version": 1.1
+}
