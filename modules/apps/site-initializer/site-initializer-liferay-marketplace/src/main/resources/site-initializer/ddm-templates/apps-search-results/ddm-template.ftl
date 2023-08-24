@@ -7,12 +7,12 @@
 	}
 
 	.adt-apps-search-results .app-search-results-card:hover {
-		color: var(--black);
+		color: let(--black);
 	}
 
 	.adt-apps-search-results .card-image-title-container .image-container {
 		height: 3rem;
-	  	min-width: 3rem;
+			min-width: 3rem;
 	}
 
 	.adt-apps-search-results .labels .category-label-remainder:hover .category-names {
@@ -79,39 +79,78 @@
 </#if>
 
 <#assign
+	channelId = ""
+	channels = restClient.get("/headless-commerce-delivery-catalog/v1.0/channels")
+	developerName = ""
 	pageSize = pageSize?has_content?then(pageSize, 15)
 	page = page?has_content?then(page, 1)
 	taxonomyVocabularyName = "Marketplace Product Type"
 	categoryName = "App"
 	taxonomyVocabulary = restClient.get("/headless-admin-taxonomy/v1.0/sites/${themeDisplay.getCompanyGroupId()}/taxonomy-vocabularies?fields=id&filter=name eq '${taxonomyVocabularyName}'").items
 	vocabularyCategory = restClient.get("/headless-admin-taxonomy/v1.0/taxonomy-vocabularies/${taxonomyVocabulary[0].id}/taxonomy-categories?fields=id&filter=name eq '${categoryName}'").items
-	productsList = restClient.get("/headless-commerce-admin-catalog/v1.0/products?filter=categoryIds/any(params:params eq '${vocabularyCategory[0].id}')&pageSize=" + pageSize + "&page=" + page)
-	numberFilteredProducts = 0
+	productsList = restClient.get("/headless-commerce-admin-catalog/v1.0/products?filter=categoryIds/any(params:params eq '${vocabularyCategory[0].id}')&pageSize=" + pageSize + "&page=" + page).items
+	priceModel = ""
+	productCount = 0
+	specificationCount = 0
 	filterCategoriesByUrlParams = getFilterByUrlParams(siteURL)
 />
 
-<#if filterCategoriesByUrlParams?has_content>
-	<#assign
-		productsList = restClient.get("/headless-commerce-admin-catalog/v1.0/products?filter=categoryIds/any(params:${filterCategoriesByUrlParams} and (params eq '${vocabularyCategory[0].id}'))&pageSize=" + pageSize + "&page=" + page)
-	/>
-</#if>
+<#list channels.items as channel>
+	<#if channel.name == "Marketplace Channel">
+		<#assign channelId = channel.id />
+	</#if>
+</#list>
 
-<#if productsList.items?has_content>
-	<#list productsList.items as productList>
-		<#assign numberFilteredProducts = numberFilteredProducts + 1 />
+<#list entries as curCPCatalogEntry>
+	<#if (curCPCatalogEntry.getCProductId())??>
+		<#assign specifications = restClient.get("/headless-commerce-delivery-catalog/v1.0/channels/" + channelId + "/products/" + curCPCatalogEntry.getCProductId() + "/product-specifications") />
+
+			<#list specifications.items as specification>
+				<#if filterCategoriesByUrlParams?has_content>
+					<#assign
+						specificationProductId = specification.productId
+						products = restClient.get("/headless-commerce-admin-catalog/v1.0/products?pageSize=" + pageSize + "&page=" + page).items
+					/>
+					<#list products as product>
+							<#if product.productId == specificationProductId>
+								<#assign
+									specificationCount = specificationCount + 1
+									productObject = {
+									"description": {"en_US": "${product.description.en_US}"},
+									"name": {"en_US": "${product.name.en_US}"},
+									"productId" : "${product.productId}",
+									"urls": {"en_US": "${product.urls.en_US}"} }
+									productsList = productsList + [productObject]
+								/>
+							</#if>
+					</#list>
+				</#if>
+			</#list>
+	</#if>
+</#list>
+
+<#if productsList?has_content>
+	<#list productsList as productList>
+		<#assign productCount = productCount + 1 />
 	</#list>
 </#if>
 
+<#if filterCategoriesByUrlParams?has_content>
+	<#assign numberFilteredProducts = specificationCount />
+<#else>
+	<#assign numberFilteredProducts = productCount - specificationCount />
+</#if>
+
 <div class="adt-apps-search-results">
-	<#if productsList.items?has_content>
-		<input id="freemarkervar" type="hidden" value="${productsList.totalCount}" />
+	<#if productsList?has_content>
+		<input id="freemarkervar" type="hidden" value="${numberFilteredProducts}" />
 
 		<div class="color-neutral-3 d-md-block d-none pb-4">
-			<strong class='color-black'>${numberFilteredProducts!}</strong> ${categoryName}s Available
+			<strong class='color-black'>${numberFilteredProducts}</strong> ${categoryName}s Available
 		</div>
 
 		<div class="cards-container pb-6">
-			<#list productsList.items as product>
+			<#list productsList as product>
 				<#assign
 					productAttachments = restClient.get("/headless-commerce-admin-catalog/v1.0/products/" + product.productId + "/attachments").items
 					productDescription = stringUtil.shorten(htmlUtil.stripHtml(product.description.en_US), 150, "...")
@@ -120,7 +159,7 @@
 					productURL = portalURL?replace("home", "p") + "/" + product.urls.en_US
 				/>
 
-				 	<a class="app-search-results-card bg-white border-radius-medium d-flex flex-column mb-0 p-3 text-dark text-decoration-none" href=${productURL}>
+					<a class="app-search-results-card bg-white border-radius-medium d-flex flex-column mb-0 p-3 text-dark text-decoration-none" href=${productURL}>
 						<div class="align-items-center card-image-title-container d-flex pb-3">
 							<div class="image-container rounded">
 								<#if productAttachments?has_content>
@@ -130,9 +169,9 @@
 												<#assign srcName = attachmentFields.src?keep_after("liferay.com") />
 
 												<img
-									   				alt=${product.name.en_US}
-									   				class="h-100 mw-100"
-									   				src="${srcName}"
+														alt=${product.name.en_US}
+														class="h-100 mw-100"
+														src="${srcName}"
 												/>
 											</#if>
 										</#list>
@@ -152,10 +191,10 @@
 											<div class="color-neutral-3 font-size-paragraph-small mt-1">
 												${product.value.en_US}
 											</div>
-					  					 </#list>
+											</#list>
 									</#if>
 							</div>
-				 		</div>
+						</div>
 
 					<div class="d-flex flex-column font-size-paragraph-small h-100 justify-content-between">
 						<div>
@@ -168,14 +207,37 @@
 
 									<#list productPriceModel as product>
 										<div class="font-weight-semi-bold mt-1">
-						   		 			${product.value.en_US}
+												${product.value.en_US}
 										</div>
 									</#list>
 								</#if>
-					 		</div>
-				  		</div>
-				 	</a>
+							</div>
+							</div>
+					</a>
 			</#list>
 		</div>
 	</#if>
 </div>
+
+<#if filterCategoriesByUrlParams?has_content>
+	<script>
+		const cards = document.querySelectorAll('a.app-search-results-card');
+		const linkCard = {};
+
+		for (const card of cards) {
+			const href = card.getAttribute('href');
+
+			if (linkCard[href]) {
+				linkCard[href]++;
+			} else {
+				linkCard[href] = 1;
+			}
+
+			if (linkCard[href] > 1) {
+				linkCard[href]--;
+			} else {
+				card.remove();
+			}
+		}
+	</script>
+</#if>
