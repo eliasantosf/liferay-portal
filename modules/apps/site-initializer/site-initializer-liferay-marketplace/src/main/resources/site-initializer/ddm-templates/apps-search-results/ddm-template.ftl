@@ -79,39 +79,76 @@
 </#if>
 
 <#assign
+	channelId = ""
+	channels = restClient.get("/headless-commerce-delivery-catalog/v1.0/channels")
+	developerName = ""
 	pageSize = pageSize?has_content?then(pageSize, 15)
 	page = page?has_content?then(page, 1)
 	taxonomyVocabularyName = "Marketplace Product Type"
 	categoryName = "App"
 	taxonomyVocabulary = restClient.get("/headless-admin-taxonomy/v1.0/sites/${themeDisplay.getCompanyGroupId()}/taxonomy-vocabularies?fields=id&filter=name eq '${taxonomyVocabularyName}'").items
 	vocabularyCategory = restClient.get("/headless-admin-taxonomy/v1.0/taxonomy-vocabularies/${taxonomyVocabulary[0].id}/taxonomy-categories?fields=id&filter=name eq '${categoryName}'").items
-	productsList = restClient.get("/headless-commerce-admin-catalog/v1.0/products?filter=categoryIds/any(params:params eq '${vocabularyCategory[0].id}')&pageSize=" + pageSize + "&page=" + page)
+	productsList = restClient.get("/headless-commerce-admin-catalog/v1.0/products?filter=categoryIds/any(params:params eq '${vocabularyCategory[0].id}')&pageSize=" + pageSize + "&page=" + page).items
+	priceModel = ""
 	numberFilteredProducts = 0
 	filterCategoriesByUrlParams = getFilterByUrlParams(siteURL)
 />
 
-<#if filterCategoriesByUrlParams?has_content>
-	<#assign
-		productsList = restClient.get("/headless-commerce-admin-catalog/v1.0/products?filter=categoryIds/any(params:${filterCategoriesByUrlParams} and (params eq '${vocabularyCategory[0].id}'))&pageSize=" + pageSize + "&page=" + page)
-	/>
-</#if>
+<#list channels.items as channel>
+	<#if channel.name == "Marketplace Channel">
+		<#assign channelId = channel.id />
+	</#if>
+</#list>
 
-<#if productsList.items?has_content>
-	<#list productsList.items as productList>
-		<#assign numberFilteredProducts = numberFilteredProducts + 1 />
-	</#list>
+
+<#--  ======================================================================  -->
+<#list entries as curCPCatalogEntry>
+	<#assign cpDefinitionId = curCPCatalogEntry.getCPDefinitionId()/>
+	
+	<#if (curCPCatalogEntry.getCProductId())??>
+		<#assign specifications = restClient.get("/headless-commerce-delivery-catalog/v1.0/channels/" + channelId + "/products/" + curCPCatalogEntry.getCProductId() + "/product-specifications") />
+
+			<#list specifications.items as specification>
+				<#if filterCategoriesByUrlParams?has_content>
+					<#assign 
+						specificationProductId = specification.productId
+						products = restClient.get("/headless-commerce-admin-catalog/v1.0/products").items
+					/>
+
+					<#list products as product>
+							<#if product.productId == specificationProductId>
+								<#assign object = {	
+									"description": {"en_US": "${product.description.en_US}"}, 
+									"name": {"en_US": "${product.name.en_US}"},
+									"productId" : "${product.productId}",  
+									"urls": {"en_US": "${product.urls.en_US}"} } 
+								/>
+								<#assign productsList = productsList + [object]>
+							</#if>
+					</#list>
+				</#if>
+			</#list>	
+	</#if>
+</#list>
+<#--  ========================================================================  -->
+
+<#if productsList?has_content>
+		<#list productsList as productItem>
+		${productItem.productId}
+			<#assign numberFilteredProducts = numberFilteredProducts + 1 />
+		</#list>
 </#if>
 
 <div class="adt-apps-search-results">
-	<#if productsList.items?has_content>
-		<input id="freemarkervar" type="hidden" value="${productsList.totalCount}" />
+	<#if productsList?has_content>
+		<input id="freemarkervar" type="hidden" value="${numberFilteredProducts}" />
 
 		<div class="color-neutral-3 d-md-block d-none pb-4">
 			<strong class='color-black'>${numberFilteredProducts!}</strong> ${categoryName}s Available
 		</div>
 
 		<div class="cards-container pb-6">
-			<#list productsList.items as product>
+			<#list productsList as product>
 				<#assign
 					productAttachments = restClient.get("/headless-commerce-admin-catalog/v1.0/products/" + product.productId + "/attachments").items
 					productDescription = stringUtil.shorten(htmlUtil.stripHtml(product.description.en_US), 150, "...")
@@ -119,7 +156,7 @@
 					portalURL = portalUtil.getLayoutURL(themeDisplay)
 					productURL = portalURL?replace("home", "p") + "/" + product.urls.en_US
 				/>
-
+				
 				 	<a class="app-search-results-card bg-white border-radius-medium d-flex flex-column mb-0 p-3 text-dark text-decoration-none" href=${productURL}>
 						<div class="align-items-center card-image-title-container d-flex pb-3">
 							<div class="image-container rounded">
@@ -179,3 +216,30 @@
 		</div>
 	</#if>
 </div>
+	<#if filterCategoriesByUrlParams?has_content>
+<script>
+
+	var links = document.querySelectorAll('a.app-search-results-card');
+	var linkCounts = {};
+
+	for (var i = 0; i < links.length; i++) {
+			var href = links[i].getAttribute('href');
+			
+			if (linkCounts[href]) {
+					linkCounts[href]++;
+			} else {
+					linkCounts[href] = 1;
+			}
+	}
+
+	for (var i = 0; i < links.length; i++) {
+			var href = links[i].getAttribute('href');
+			
+			if (linkCounts[href] > 1) {
+					linkCounts[href]--;
+			} else {
+					links[i].parentNode.removeChild(links[i]);
+			}
+	}
+</script>
+</#if>

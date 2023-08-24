@@ -627,13 +627,21 @@
 														},
 														"type": "Widget"
 													},
+
+
 													{
 														"definition": {
 															"widgetInstance": {
 																"widgetConfig": {
+																	"displayStyle": "ddmTemplate_MARKETPLACE-PRICE-MODEL",
+																	"maxTerms": "10",
+																	"frequencyThreshold": "1",
+																	"frequenciesVisible": "true",
+																	"displayStyleGroupId": "[$GROUP_ID$]"
 																},
 																"widgetName": "com_liferay_commerce_product_content_search_web_internal_portlet_CPSpecificationOptionFacetsPortlet",
 																"widgetPermissions": [
+																	{ "actionKeys": ["VIEW"], "roleKey": "Site Member" },
 																	{
 																		"actionKeys": [
 																			"ADD_PORTLET_DISPLAY_TEMPLATE",
@@ -645,18 +653,7 @@
 																		],
 																		"roleKey": "Owner"
 																	},
-																	{
-																		"actionKeys": [
-																			"VIEW"
-																		],
-																		"roleKey": "Site Member"
-																	},
-																	{
-																		"actionKeys": [
-																			"VIEW"
-																		],
-																		"roleKey": "Guest"
-																	}
+																	{ "actionKeys": ["VIEW"], "roleKey": "Guest" }
 																]
 															}
 														},
