@@ -101,34 +101,6 @@
 	</#if>
 </#list>
 
-<#list entries as curCPCatalogEntry>
-	<#if (curCPCatalogEntry.getCProductId())??>
-		<#assign specifications = restClient.get("/headless-commerce-delivery-catalog/v1.0/channels/" + channelId + "/products/" + curCPCatalogEntry.getCProductId() + "/product-specifications") />
-
-			<#list specifications.items as specification>
-				<#if filterCategoriesByUrlParams?has_content>
-					<#assign
-						specificationProductId = specification.productId
-						products = restClient.get("/headless-commerce-admin-catalog/v1.0/products?pageSize=" + pageSize + "&page=" + page).items
-					/>
-					<#list products as product>
-							<#if product.productId == specificationProductId>
-								<#assign
-									specificationCount = specificationCount + 1
-									productObject = {
-									"description": {"en_US": "${product.description.en_US}"},
-									"name": {"en_US": "${product.name.en_US}"},
-									"productId" : "${product.productId}",
-									"urls": {"en_US": "${product.urls.en_US}"} }
-									productsList = productsList + [productObject]
-								/>
-							</#if>
-					</#list>
-				</#if>
-			</#list>
-	</#if>
-</#list>
-
 <#if productsList?has_content>
 	<#list productsList as productList>
 		<#assign productCount = productCount + 1 />
@@ -159,6 +131,26 @@
 					productURL = portalURL?replace("home", "p") + "/" + product.urls.en_US
 				/>
 
+
+			
+		<#list 	productSpecifications as specification>
+
+			<#list productSpecifications as specification>
+				<#if filterCategoriesByUrlParams?has_content>
+						<#assign specificationPrice = []>
+						<#list siteURL?split("&") as params>
+								<#if params?index_of("price=") != -1>
+										<#assign priceValue = params?substring(params?index_of("price=") + 6)>
+										<#assign specificationPrice = specificationPrice + [specification.value.en_US == priceValue]>
+								</#if>
+						</#list>
+						<#assign specificationPrice = specificationPrice?seq_contains(true)>
+				<#else>
+						<#assign specificationPrice = true>
+				</#if>
+		</#list>
+
+			<#if specificationPrice>
 					<a class="app-search-results-card bg-white border-radius-medium d-flex flex-column mb-0 p-3 text-dark text-decoration-none" href=${productURL}>
 						<div class="align-items-center card-image-title-container d-flex pb-3">
 							<div class="image-container rounded">
@@ -214,30 +206,9 @@
 							</div>
 							</div>
 					</a>
+			</#if>
+		</#list>
 			</#list>
 		</div>
 	</#if>
 </div>
-
-<#if filterCategoriesByUrlParams?has_content>
-	<script>
-		const cards = document.querySelectorAll('a.app-search-results-card');
-		const linkCard = {};
-
-		for (const card of cards) {
-			const href = card.getAttribute('href');
-
-			if (linkCard[href]) {
-				linkCard[href]++;
-			} else {
-				linkCard[href] = 1;
-			}
-
-			if (linkCard[href] > 1) {
-				linkCard[href]--;
-			} else {
-				card.remove();
-			}
-		}
-	</script>
-</#if>
