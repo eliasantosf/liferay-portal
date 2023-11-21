@@ -101,12 +101,13 @@ function fillManagerEmailAddress(managerData, managerEmailAddressInput) {
 async function init() {
 	const user = await getUser();
 	const managerData = getManagerData(user);
+	const managerEmailAddress = document.querySelector('.managerEmailAddress');
 	const managerEmailAddressInput = document.querySelector(
 		'[name="managerEmailAddress"]'
 	);
 
 	if (!managerData) {
-		managerEmailAddressInput.style.display = 'none';
+		managerEmailAddress.style.display = 'none';
 	} else {
 		fillManagerEmailAddress(managerData, managerEmailAddressInput);
 	}

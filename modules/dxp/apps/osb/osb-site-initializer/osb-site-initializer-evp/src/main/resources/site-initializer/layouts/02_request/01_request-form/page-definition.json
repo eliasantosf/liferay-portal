@@ -341,6 +341,9 @@
 									},
 									{
 										"definition": {
+											"cssClasses": [
+												"managerEmailAddress"
+											],
 											"fragment": {
 												"key": "INPUTS-text-input"
 											},
