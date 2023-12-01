@@ -123,7 +123,7 @@ export function appReducer(state: InitialStateProps, action: TAction) {
 
 			const filteredLicensePriceTier = sortedOldLicensePrice[
 				licenseTier
-			].filter((priceTier) => priceTier.key !== action.payload.key);
+			].filter((priceTier: { key: any; }) => priceTier.key !== action.payload.key);
 
 			return {
 				...state,
@@ -274,6 +274,16 @@ export function appReducer(state: InitialStateProps, action: TAction) {
 			const optionValuesId = {noOptionId, yesOptionId};
 
 			return {...state, optionValuesId};
+		}
+
+		case TYPES.UPDATE_DXP_PRODUCT_OPTION_VALUES_ID: {
+			const developerOptionId = action.payload.developerOptionId;
+			const standardOptionId = action.payload.standardOptionId;
+			const trialOptionId = action.payload.trialOptionId;
+
+			const dxpOptionValuesId = {developerOptionId, standardOptionId, trialOptionId};
+
+			return {...state, dxpOptionValuesId};
 		}
 
 		case TYPES.UPDATE_SKU_TRIAL_ID: {

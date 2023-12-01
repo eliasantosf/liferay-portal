@@ -29,7 +29,7 @@ export type InitialStateProps = {
 	appId: string;
 	appInstallationGuideURL: Specification;
 	appLicense: Specification;
-	appLicensePrice: LicenceTiersPrices;
+	appLicensePrice: LicenceTiersPrices | any;
 	appLogo: UploadedFile;
 	appName: string;
 	appNotes: string;
@@ -46,6 +46,7 @@ export type InitialStateProps = {
 	gravatarAPI: string;
 	optionId: number;
 	optionValuesId: {noOptionId: number; yesOptionId: number};
+	dxpOptionValuesId: {developerOptionId: number; standardOptionId: number; trialOptionId: number};
 	priceModel: Specification;
 	productOptionId: number;
 	publisherWebsiteURL: Specification;
@@ -53,6 +54,10 @@ export type InitialStateProps = {
 	skuVersionId: number;
 	supportURL: Specification;
 };
+
+export type PriceEntry = {sku:{name:string}; priceEntryId:number};
+
+export type Sku = {id:number};
 
 const initialState = ({
 	appBuild: 'upload',

@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later OR LicenseRef-Liferay-DXP-EULA-2.0.0-2023-06
  */
 
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 
 import {Header} from '../../components/Header/Header';
 import {Input} from '../../components/Input/Input';
@@ -17,11 +17,24 @@ import {
 	createAppSKU,
 	getOptions,
 	getProductSKU,
+	postOption,
 	postOptionValue,
-	postTrialOption,
-	postTrialProductOption,
+	postProductOption,
 } from '../../utils/api';
-import {createSkuName} from '../../utils/util';
+import {
+	createSkuName,
+	getDxpOptionBody,
+	getDxpProductOptionBody,
+	getLicenceTypesObject,
+	getOptionDeveloperBody,
+	getOptionNoBody,
+	getOptionStandardBody,
+	getOptionTrialBody,
+	getOptionYesBody,
+	getSkuBody,
+	getTrialOptionBody,
+	getTrialProductOptionBody,
+} from '../../utils/util';
 
 import './ProvideVersionDetailsPage.scss';
 
@@ -38,13 +51,19 @@ export function ProvideVersionDetailsPage({
 		{
 			appNotes,
 			appProductId,
+			appType,
 			appVersion,
+			dxpOptionValuesId,
 			optionId,
 			optionValuesId,
 			productOptionId,
 		},
 		dispatch,
 	] = useAppContext();
+
+	let skuId: number;
+
+	const isDxp = appType.value === 'dxp';
 
 	useEffect(() => {
 		if (!productOptionId) {
@@ -54,11 +73,18 @@ export function ProvideVersionDetailsPage({
 
 				const trialOption = options.find(({key}) => key === 'trial');
 
-				if (!optionId && !trialOption) {
-					newOptionId = await postTrialOption();
-				}
-				else {
-					newOptionId = optionId ?? trialOption!.id;
+				const dxpOption = options.find(
+					({key}) => key === 'dxp-license-usage-type'
+				);
+
+				const targetOption = isDxp ? dxpOption : trialOption;
+
+				if (!optionId && !targetOption) {
+					newOptionId = await postOption(
+						isDxp ? getDxpOptionBody() : getTrialOptionBody()
+					);
+				} else {
+					newOptionId = optionId ?? targetOption!.id;
 				}
 
 				dispatch({
@@ -66,9 +92,13 @@ export function ProvideVersionDetailsPage({
 					type: TYPES.UPDATE_OPTION_ID,
 				});
 
-				const newProductOptionId = await postTrialProductOption(
-					newOptionId,
-					appProductId
+				const productOption = isDxp
+					? getDxpProductOptionBody(newOptionId)
+					: getTrialProductOptionBody(newOptionId);
+
+				const newProductOptionId = await postProductOption(
+					appProductId,
+					productOption
 				);
 
 				dispatch({
@@ -76,28 +106,47 @@ export function ProvideVersionDetailsPage({
 					type: TYPES.UPDATE_PRODUCT_OPTION_ID,
 				});
 
-				const noOptionId = await postOptionValue(
-					'no',
-					'No',
-					newProductOptionId,
-					0
-				);
-				const yesOptionId = await postOptionValue(
-					'yes',
-					'Yes',
-					newProductOptionId,
-					1
-				);
+				if (isDxp) {
+					const standardOptionId = await postOptionValue(
+						getOptionStandardBody(),
+						newProductOptionId
+					);
+					const developerOptionId = await postOptionValue(
+						getOptionDeveloperBody(),
+						newProductOptionId
+					);
+					const trialOptionId = await postOptionValue(
+						getOptionTrialBody(),
+						newProductOptionId
+					);
 
-				dispatch({
-					payload: {noOptionId, yesOptionId},
-					type: TYPES.UPDATE_PRODUCT_OPTION_VALUES_ID,
-				});
+					dispatch({
+						payload: {
+							developerOptionId,
+							standardOptionId,
+							trialOptionId,
+						},
+						type: TYPES.UPDATE_DXP_PRODUCT_OPTION_VALUES_ID,
+					});
+				} else {
+					const noOptionId = await postOptionValue(
+						getOptionNoBody(),
+						newProductOptionId
+					);
+					const yesOptionId = await postOptionValue(
+						getOptionYesBody(),
+						newProductOptionId
+					);
+					dispatch({
+						payload: {noOptionId, yesOptionId},
+						type: TYPES.UPDATE_PRODUCT_OPTION_VALUES_ID,
+					});
+				}
 			};
 
 			makeFetch();
 		}
-	}, [appProductId, dispatch, optionId, productOptionId]);
+	}, []);
 
 	return (
 		<div className="provide-version-details-page-container">
@@ -156,33 +205,28 @@ export function ProvideVersionDetailsPage({
 							sku === createSkuName(appProductId, appVersion)
 					);
 
-					let skuId;
-
 					if (versionSku) {
-						skuId = versionSku.id;
-					}
-					else {
-						const response = await createAppSKU({
-							appProductId,
-							body: {
-								published: true,
-								purchasable: true,
-								sku: createSkuName(appProductId, appVersion),
-								skuOptions: [
-									{
-										key: productOptionId,
-										value: optionValuesId.noOptionId,
-									},
-								],
-							},
-						});
+						skuId = versionSku?.id;
+					} else {
+						if (isDxp) {
+							for (const sku of getLicenceTypesObject()) {
+								const response = await createAppSKU(
+									getSkuBody(sku.name)
+								);
 
-						skuId = response.id;
+								skuId = response?.id;
+							}
+						} else {
+							const sku = getSkuBody(
+								createSkuName(appProductId, appVersion)
+							);
+							const response = await createAppSKU(sku);
+
+							skuId = response?.id;
+						}
 
 						dispatch({
-							payload: {
-								value: response.id,
-							},
+							payload: {value: skuId},
 							type: TYPES.UPDATE_SKU_VERSION_ID,
 						});
 					}
