@@ -46,37 +46,6 @@
 					},
 					{
 						"definition": {
-							"fragmentStyle": {
-							},
-							"indexed": true,
-							"layout": {
-								"opacity": 100,
-								"widthType": "Fluid"
-							}
-						},
-						"pageElements": [
-							{
-								"definition": {
-									"fragment": {
-										"key": "evp-grant-values",
-										"siteKey": "[$GROUP_KEY$]"
-									},
-									"fragmentConfig": {
-									},
-									"fragmentFields": [
-									],
-									"fragmentStyle": {
-										"textAlign": "right"
-									},
-									"indexed": true
-								},
-								"type": "Fragment"
-							}
-						],
-						"type": "Section"
-					},
-					{
-						"definition": {
 							"fragment": {
 								"key": "DIALECT-dialect-text"
 							},
