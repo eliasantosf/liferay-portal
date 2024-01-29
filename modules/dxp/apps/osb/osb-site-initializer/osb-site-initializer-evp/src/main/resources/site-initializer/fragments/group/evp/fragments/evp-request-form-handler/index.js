@@ -95,21 +95,36 @@ function getManagerData(user) {
 
 function fillManagerEmailAddress(managerData, managerEmailAddressInput) {
 	managerEmailAddressInput.value = managerData;
-	managerEmailAddressInput.disabled = true;
+	managerEmailAddressInput.readOnly = true;
+}
+
+function fillFullNameAndEmailAddress(user) {
+	const fullNameInput = document.querySelector('[name="fullName"]');
+	const emailAddressInput = document.querySelector('[name="emailAddress"]');
+
+	emailAddressInput.value = user?.emailAddress;
+	emailAddressInput.readOnly = true;
+
+	fullNameInput.value = user?.name;
+	fullNameInput.readOnly = true;
 }
 
 async function init() {
 	const user = await getUser();
 	const managerData = getManagerData(user);
-	const managerEmailAddress = document.querySelector('.managerEmailAddress');
 	const managerEmailAddressInput = document.querySelector(
 		'[name="managerEmailAddress"]'
 	);
 
 	if (!managerData) {
-		managerEmailAddress.style.display = 'none';
+		managerEmailAddressInput.placeholder = 'No Manager';
+		managerEmailAddressInput.readOnly = true;
 	} else {
 		fillManagerEmailAddress(managerData, managerEmailAddressInput);
+	}
+
+	if (user?.name && user?.emailAddress) {
+		fillFullNameAndEmailAddress(user);
 	}
 
 	document.addEventListener('click', handleDocumentClick);

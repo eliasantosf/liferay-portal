@@ -197,20 +197,6 @@
 					},
 					{
 						"definition": {
-							"fragment": {
-								"key": "evp-organization-list",
-								"siteKey": "[$GROUP_KEY$]"
-							},
-							"fragmentConfig": {
-							},
-							"fragmentFields": [
-							],
-							"indexed": true
-						},
-						"type": "Fragment"
-					},
-					{
-						"definition": {
 							"cssClasses": [
 								"fieldRequestStatus"
 							],
@@ -223,6 +209,28 @@
 							},
 							"fragmentFields": [
 							],
+							"indexed": true
+						},
+						"type": "Fragment"
+					},
+					{
+						"definition": {
+							"cssClasses": [
+								".form-request-type"
+							],
+							"fragment": {
+								"key": "INPUTS-select-from-list"
+							},
+							"fragmentConfig": {
+								"inputFieldId": "ObjectField_r_organization_c_evpOrganizationId",
+								"inputRequired": true
+							},
+							"fragmentFields": [
+							],
+							"fragmentStyle": {
+								"paddingBottom": "3",
+								"textColor": "colorNeutral9"
+							},
 							"indexed": true
 						},
 						"type": "Fragment"
@@ -668,28 +676,6 @@
 							},
 							"fragmentFields": [
 							],
-							"indexed": true
-						},
-						"type": "Fragment"
-					},
-					{
-						"definition": {
-							"cssClasses": [
-								"requestStatusHandler"
-							],
-							"customCSS": ".requestStatusHandler{\n display:none;\n}",
-							"fragment": {
-								"key": "INPUTS-select-from-list"
-							},
-							"fragmentConfig": {
-								"inputFieldId": "ObjectField_r_organization_c_evpOrganizationId",
-								"inputRequired": false
-							},
-							"fragmentFields": [
-							],
-							"fragmentStyle": {
-								"marginBottom": "3"
-							},
 							"indexed": true
 						},
 						"type": "Fragment"
