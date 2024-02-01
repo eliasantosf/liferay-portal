@@ -109,11 +109,76 @@ function fillFullNameAndEmailAddress(user) {
 	fullNameInput.readOnly = true;
 }
 
+const getData = (user, fieldName) => {
+	const field = user?.customFields.find((field) => field.name === fieldName);
+
+	return field?.customValue?.data || null;
+};
+
+const validateGrantAmount = (
+	user,
+	errorMessageGrant,
+	grantAmountInput,
+	submitBtn
+) => {
+	grantAmountInput.addEventListener('input', () => {
+		const inputValue = grantAmountInput.value;
+		const grantValue = getData(user, 'EVP Grant Value');
+
+		const isInsufficientFunds = inputValue > grantValue;
+
+		errorMessageGrant.innerHTML = isInsufficientFunds
+			? Liferay.Util.escape('Insufficient funds')
+			: '';
+		grantAmountInput.style.backgroundColor = isInsufficientFunds
+			? '#fce3ea'
+			: '';
+		grantAmountInput.style.borderColor = isInsufficientFunds ? 'red' : '';
+		submitBtn.disabled = isInsufficientFunds;
+	});
+};
+
+const validateTotalHoursRequested = (
+	user,
+	errorMessageService,
+	submitBtn,
+	totalHoursInput
+) => {
+	totalHoursInput.addEventListener('input', () => {
+		const inputValue = totalHoursInput.value;
+		const valueOfHoursOfService = getData(
+			user,
+			'EVP Value of Hours of Service'
+		);
+
+		const isInsufficientFunds = inputValue > valueOfHoursOfService;
+
+		errorMessageService.innerHTML = isInsufficientFunds
+			? Liferay.Util.escape('Insufficient hours')
+			: '';
+		totalHoursInput.style.backgroundColor = isInsufficientFunds
+			? '#fce3ea'
+			: '';
+		totalHoursInput.style.borderColor = isInsufficientFunds ? 'red' : '';
+		submitBtn.disabled = isInsufficientFunds;
+	});
+};
+
 async function init() {
 	const user = await getUser();
+	const errorMessageGrant = document.querySelector('.error-message-grant');
+	const errorMessageService = document.querySelector(
+		'.error-message-service'
+	);
+	const grantAmountInput = document.querySelector('[name="grantAmount"]');
 	const managerData = getManagerData(user);
 	const managerEmailAddressInput = document.querySelector(
 		'[name="managerEmailAddress"]'
+	);
+	const submitBtn = document.querySelector('[name="status"]');
+
+	const totalHoursInput = document.querySelector(
+		'[name="totalHoursRequested"]'
 	);
 
 	if (!managerData) {
@@ -126,6 +191,14 @@ async function init() {
 	if (user?.name && user?.emailAddress) {
 		fillFullNameAndEmailAddress(user);
 	}
+
+	validateGrantAmount(user, errorMessageGrant, grantAmountInput, submitBtn);
+	validateTotalHoursRequested(
+		user,
+		errorMessageService,
+		submitBtn,
+		totalHoursInput
+	);
 
 	document.addEventListener('click', handleDocumentClick);
 }

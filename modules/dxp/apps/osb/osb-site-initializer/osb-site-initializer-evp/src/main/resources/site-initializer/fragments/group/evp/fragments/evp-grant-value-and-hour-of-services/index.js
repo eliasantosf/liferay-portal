@@ -29,8 +29,8 @@ const getData = (user, fieldName) => {
 
 const init = async () => {
   const user = await getUser();
-  const grant = getData(user, 'Grant');
-  const hoursOfService = getData(user, 'Hours of Service');
+  const grant = getData(user, 'EVP Grant Value');
+  const hoursOfService = getData(user, 'EVP Value of Hours of Service');
 
   document.getElementById("grant").innerHTML = Liferay.Util.escape(`Available grant value: ${grant}`);
   document.getElementById("service").innerHTML = Liferay.Util.escape(`Hours of services available: ${hoursOfService}`);
