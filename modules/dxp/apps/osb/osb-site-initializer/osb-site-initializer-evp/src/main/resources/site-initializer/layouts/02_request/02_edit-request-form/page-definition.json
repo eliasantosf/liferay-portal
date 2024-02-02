@@ -46,37 +46,6 @@
 					},
 					{
 						"definition": {
-							"fragmentStyle": {
-							},
-							"indexed": true,
-							"layout": {
-								"opacity": 100,
-								"widthType": "Fluid"
-							}
-						},
-						"pageElements": [
-							{
-								"definition": {
-									"fragment": {
-										"key": "evp-grant-values",
-										"siteKey": "[$GROUP_KEY$]"
-									},
-									"fragmentConfig": {
-									},
-									"fragmentFields": [
-									],
-									"fragmentStyle": {
-										"textAlign": "right"
-									},
-									"indexed": true
-								},
-								"type": "Fragment"
-							}
-						],
-						"type": "Section"
-					},
-					{
-						"definition": {
 							"fragment": {
 								"key": "DIALECT-dialect-text"
 							},
@@ -231,35 +200,21 @@
 					},
 					{
 						"definition": {
-							"fragment": {
-								"key": "evp-organization-list",
-								"siteKey": "[$GROUP_KEY$]"
-							},
-							"fragmentConfig": {
-							},
-							"fragmentFields": [
-							],
-							"indexed": true
-						},
-						"type": "Fragment"
-					},
-					{
-						"definition": {
 							"cssClasses": [
-								"fieldOrganizationForm"
+								".form-request-type"
 							],
-							"customCSS": ".fieldOrganizationForm{\n display:none;\n}",
 							"fragment": {
 								"key": "INPUTS-select-from-list"
 							},
 							"fragmentConfig": {
 								"inputFieldId": "ObjectField_r_organization_c_evpOrganizationId",
-								"inputRequired": false
+								"inputRequired": true
 							},
 							"fragmentFields": [
 							],
 							"fragmentStyle": {
-								"marginBottom": "3"
+								"paddingBottom": "3",
+								"textColor": "colorNeutral9"
 							},
 							"indexed": true
 						},

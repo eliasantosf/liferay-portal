@@ -5,6 +5,18 @@
 		"name": "Cost Center"
 	},
 	{
+		"dataType": 5,
+		"defaultValue": 1000.0,
+		"modelResource": "com.liferay.portal.kernel.model.User",
+		"name": "EVP Grant Value"
+	},
+	{
+		"dataType": 17,
+		"defaultValue": 40,
+		"modelResource": "com.liferay.portal.kernel.model.User",
+		"name": "EVP Value of Hours of Service"
+	},
+	{
 		"dataType": 15,
 		"modelResource": "com.liferay.portal.kernel.model.User",
 		"name": "Entity"

@@ -2,8 +2,7 @@
 	"configurationPath": "configuration.json",
 	"cssPath": "index.css",
 	"htmlPath": "index.html",
-	"icon": "code",
 	"jsPath": "index.js",
-	"name": "EVP Grant Values",
+	"name": "EVP Grant Value and Hour of Services",
 	"type": "component"
 }
