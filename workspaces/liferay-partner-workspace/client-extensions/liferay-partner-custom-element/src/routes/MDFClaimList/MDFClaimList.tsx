@@ -12,7 +12,7 @@ import ClayTabs from '@clayui/tabs';
 import {useState} from 'react';
 import {CSVLink} from 'react-csv';
 
-import Table from '../../common/components/PRMTable';
+import PRMTable from '../../common/components/PRMTable';
 import TableHeader from '../../common/components/TableHeader';
 import CheckboxFilter from '../../common/components/TableHeader/Filter/components/CheckboxFilter';
 import DropDownWithDrillDown from '../../common/components/TableHeader/Filter/components/DropDownWithDrillDown';
@@ -99,7 +99,7 @@ const MDFClaimList = () => {
 
 			return (
 				<div className="mt-3">
-					<Table<MDFClaimListItem> columns={columns} rows={items} />
+					<PRMTable columns={columns} rows={items} />
 
 					<ClayPaginationBarWithBasicItems
 						{...pagination}

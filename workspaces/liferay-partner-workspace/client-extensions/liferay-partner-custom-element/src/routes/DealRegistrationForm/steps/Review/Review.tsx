@@ -9,7 +9,7 @@ import {useFormikContext} from 'formik';
 
 import PRMForm from '../../../../common/components/PRMForm';
 import PRMFormikPageProps from '../../../../common/components/PRMFormik/interfaces/prmFormikPageProps';
-import Table from '../../../../common/components/PRMTable';
+import PRMTable from '../../../../common/components/PRMTable';
 import DealRegistration from '../../../../common/interfaces/dealRegistration';
 import {StepType} from '../../enums/stepType';
 import DealRegistrationStepProps from '../../interfaces/dealRegistrationStepProps';
@@ -29,7 +29,7 @@ const Review = ({
 				name="review"
 				title="Review Deal Registration"
 			>
-				<Table
+				<PRMTable
 					className="bg-brand-primary-lighten-6 border-top table-striped"
 					columns={[
 						{
@@ -53,7 +53,7 @@ const Review = ({
 					]}
 				/>
 
-				<Table
+				<PRMTable
 					className="bg-brand-primary-lighten-6 border-top table-striped"
 					columns={[
 						{
@@ -97,7 +97,7 @@ const Review = ({
 					]}
 				/>
 
-				<Table
+				<PRMTable
 					className="bg-brand-primary-lighten-6 border-top table-striped"
 					columns={[
 						{
@@ -137,7 +137,7 @@ const Review = ({
 					]}
 				/>
 
-				<Table
+				<PRMTable
 					className="bg-brand-primary-lighten-6 border-top table-striped"
 					columns={[
 						{
@@ -165,7 +165,7 @@ const Review = ({
 					]}
 				/>
 
-				<Table
+				<PRMTable
 					className="bg-brand-primary-lighten-6 border-top table-striped"
 					columns={[
 						{
@@ -186,7 +186,7 @@ const Review = ({
 					]}
 				/>
 
-				<Table
+				<PRMTable
 					className="bg-brand-primary-lighten-6 border-top table-striped"
 					columns={[
 						{
@@ -210,7 +210,7 @@ const Review = ({
 					]}
 				/>
 
-				<Table
+				<PRMTable
 					className="bg-brand-primary-lighten-6 border-top table-striped"
 					columns={[
 						{

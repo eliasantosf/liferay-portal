@@ -12,7 +12,7 @@ import ClayTabs from '@clayui/tabs';
 import {useMemo, useState} from 'react';
 import {CSVLink} from 'react-csv';
 
-import Table from '../../common/components/PRMTable';
+import PRMTable from '../../common/components/PRMTable';
 import CheckboxFilter from '../../common/components/TableHeader/Filter/components/CheckboxFilter';
 import DropDownWithDrillDown from '../../common/components/TableHeader/Filter/components/DropDownWithDrillDown';
 import DateFilter from '../../common/components/TableHeader/Filter/components/filters/DateFilter/DateFilter';
@@ -129,7 +129,10 @@ const MDFRequestList = () => {
 
 			return (
 				<div className="mt-3">
-					<Table<MDFRequestListItem> columns={columns} rows={items} />
+					<PRMTable<MDFRequestListItem>
+						columns={columns}
+						rows={items}
+					/>
 
 					<ClayPaginationBarWithBasicItems
 						{...pagination}

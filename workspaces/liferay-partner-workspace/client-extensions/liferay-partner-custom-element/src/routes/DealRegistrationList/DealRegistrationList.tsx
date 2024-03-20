@@ -23,7 +23,7 @@ import {PRMPageRoute} from '../../common/enums/prmPageRoute';
 import useLiferayNavigate from '../../common/hooks/useLiferayNavigate';
 import usePagination from '../../common/hooks/usePagination';
 import usePermissionActions from '../../common/hooks/usePermissionActions';
-import {DealRegistrationListItem} from '../../common/interfaces/dealRegistrationListItem';
+import RowStructure from '../../common/interfaces/rowStructure';
 import {Liferay} from '../../common/services/liferay';
 import getDoubleParagraph from '../../common/utils/getDoubleParagraph';
 import ModalContent from './components/ModalContent';
@@ -55,7 +55,7 @@ const DealRegistrationList = ({getFilteredItems, sort}: IProps) => {
 	const {filters, filtersTerm, onFilter} = useFilters(submittedDealsFilter);
 
 	const [isVisibleModal, setIsVisibleModal] = useState(false);
-	const [modalContent, setModalContent] = useState<DealRegistrationItem>({});
+	const [modalContent, setModalContent] = useState({});
 
 	const {observer, onClose} = useModal({
 		onClose: () => {
@@ -123,7 +123,7 @@ const DealRegistrationList = ({getFilteredItems, sort}: IProps) => {
 		},
 	];
 
-	const handleCustomClickOnRow = (item: DealRegistrationItem) => {
+	const handleCustomClickOnRow = (item: RowStructure) => {
 		setIsVisibleModal(true);
 		setModalContent(item);
 	};
@@ -155,7 +155,7 @@ const DealRegistrationList = ({getFilteredItems, sort}: IProps) => {
 
 			return (
 				<div className="mt-3">
-					<PRMTable<DealRegistrationListItem>
+					<PRMTable
 						columns={columns}
 						customClickOnRow={handleCustomClickOnRow}
 						rows={items}

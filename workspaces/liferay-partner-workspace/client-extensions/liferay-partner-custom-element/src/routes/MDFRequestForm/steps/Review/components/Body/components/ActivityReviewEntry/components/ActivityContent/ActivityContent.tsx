@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later OR LicenseRef-Liferay-DXP-EULA-2.0.0-2023-06
  */
 
-import Table from '../../../../../../../../../../common/components/PRMTable';
+import PRMTable from '../../../../../../../../../../common/components/PRMTable';
 import MDFRequestActivity from '../../../../../../../../../../common/interfaces/mdfRequestActivity';
 import getBooleanValidation from '../../../../../../../../../../common/utils/getBooleanValidation';
 import getBooleanValue from '../../../../../../../../../../common/utils/getBooleanValue';
@@ -50,7 +50,7 @@ const ActivityContent = ({mdfRequestActivity}: IProps) => {
 
 	return (
 		<>
-			<Table
+			<PRMTable
 				className="bg-brand-primary-lighten-6 border-top table-striped"
 				columns={[
 					{
@@ -72,7 +72,7 @@ const ActivityContent = ({mdfRequestActivity}: IProps) => {
 					}))}
 			/>
 
-			<Table
+			<PRMTable
 				className="bg-brand-primary-lighten-6 border-top table-striped"
 				columns={[
 					{

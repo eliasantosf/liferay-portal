@@ -14,19 +14,14 @@ interface TableProps<T> {
 	rows: T[];
 }
 
-interface RowStructure {
-	id?: number;
-	[key: string]: any;
-}
-
 type ChildrenRender<T> = ((item: T) => React.ReactElement) & string;
 
-const PRMTable = ({
+const PRMTable = <T extends unknown>({
 	className,
 	columns,
 	customClickOnRow,
 	rows,
-}: TableProps<RowStructure>) => {
+}: TableProps<T>) => {
 	return (
 		<Table
 			borderless
@@ -38,7 +33,7 @@ const PRMTable = ({
 				{
 					((item) => (
 						<Cell key={item.columnKey}>{item.label}</Cell>
-					)) as ChildrenRender<TableColumn<RowStructure>>
+					)) as ChildrenRender<TableColumn<T>>
 				}
 			</Head>
 
@@ -48,11 +43,16 @@ const PRMTable = ({
 						<Row items={columns}>
 							{
 								((column) => {
-									const data = row[column.columnKey];
+									const data: any =
+										row[column.columnKey as keyof T];
 
 									return (
 										<Cell
-											key={`${row.id}:${column.columnKey}`}
+											key={`${
+												(row as {RANDOM_ID: string})[
+													'RANDOM_ID'
+												]
+											}:${column.columnKey}`}
 											onClick={() => {
 												if (customClickOnRow) {
 													return customClickOnRow(
@@ -66,10 +66,10 @@ const PRMTable = ({
 												: data}
 										</Cell>
 									);
-								}) as ChildrenRender<TableColumn<RowStructure>>
+								}) as ChildrenRender<TableColumn<T>>
 							}
 						</Row>
-					)) as ChildrenRender<RowStructure>
+					)) as ChildrenRender<T>
 				}
 			</Body>
 		</Table>

@@ -18,7 +18,7 @@ export default function useGetListItemsFromMDFRequests(
 	return useMemo(
 		() =>
 			items?.map((item) => ({
-				id: Math.random().toString(16).slice(2),
+				[MDFColumnKey.RANDOM_ID]: Math.random().toString(16).slice(2),
 				[MDFColumnKey.BALANCE]: Number(item.totalPaidAmount)
 					? getIntlNumberFormat(item.currency).format(
 							Number(item.totalClaimedRequest) -
