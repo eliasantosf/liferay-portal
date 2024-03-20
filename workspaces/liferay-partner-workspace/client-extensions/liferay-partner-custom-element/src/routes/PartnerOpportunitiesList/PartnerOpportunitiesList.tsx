@@ -12,7 +12,7 @@ import {useState} from 'react';
 import {CSVLink} from 'react-csv';
 
 import Modal from '../../common/components/Modal';
-import Table from '../../common/components/Table';
+import PRMTable from '../../common/components/PRMTable';
 import TableHeader from '../../common/components/TableHeader';
 import Search from '../../common/components/TableHeader/Search';
 import {PartnerOpportunitiesColumnKey} from '../../common/enums/partnerOpportunitiesColumnKey';
@@ -160,7 +160,7 @@ const PartnerOpportunitiesList = ({
 
 			return (
 				<div className="mt-3">
-					<Table<PartnerOpportunitiesItem>
+					<PRMTable<PartnerOpportunitiesItem>
 						columns={columns}
 						customClickOnRow={handleCustomClickOnRow}
 						rows={items}

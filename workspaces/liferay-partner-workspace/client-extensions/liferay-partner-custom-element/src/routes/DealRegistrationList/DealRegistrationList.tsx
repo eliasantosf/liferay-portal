@@ -13,7 +13,7 @@ import {useState} from 'react';
 import {CSVLink} from 'react-csv';
 
 import Modal from '../../common/components/Modal';
-import Table from '../../common/components/Table';
+import PRMTable from '../../common/components/PRMTable';
 import TableHeader from '../../common/components/TableHeader';
 import Search from '../../common/components/TableHeader/Search';
 import {DealRegistrationColumnKey} from '../../common/enums/dealRegistrationColumnKey';
@@ -155,7 +155,7 @@ const DealRegistrationList = ({getFilteredItems, sort}: IProps) => {
 
 			return (
 				<div className="mt-3">
-					<Table<DealRegistrationListItem>
+					<PRMTable<DealRegistrationListItem>
 						columns={columns}
 						customClickOnRow={handleCustomClickOnRow}
 						rows={items}

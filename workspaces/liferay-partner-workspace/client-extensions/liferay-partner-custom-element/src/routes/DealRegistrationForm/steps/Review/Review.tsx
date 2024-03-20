@@ -9,7 +9,7 @@ import {useFormikContext} from 'formik';
 
 import PRMForm from '../../../../common/components/PRMForm';
 import PRMFormikPageProps from '../../../../common/components/PRMFormik/interfaces/prmFormikPageProps';
-import Table from '../../../../common/components/Table';
+import Table from '../../../../common/components/PRMTable';
 import DealRegistration from '../../../../common/interfaces/dealRegistration';
 import {StepType} from '../../enums/stepType';
 import DealRegistrationStepProps from '../../interfaces/dealRegistrationStepProps';

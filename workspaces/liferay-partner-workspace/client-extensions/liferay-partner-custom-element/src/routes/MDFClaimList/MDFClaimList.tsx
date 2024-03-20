@@ -12,7 +12,7 @@ import ClayTabs from '@clayui/tabs';
 import {useState} from 'react';
 import {CSVLink} from 'react-csv';
 
-import Table from '../../common/components/Table';
+import Table from '../../common/components/PRMTable';
 import TableHeader from '../../common/components/TableHeader';
 import CheckboxFilter from '../../common/components/TableHeader/Filter/components/CheckboxFilter';
 import DropDownWithDrillDown from '../../common/components/TableHeader/Filter/components/DropDownWithDrillDown';
